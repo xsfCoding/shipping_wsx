@@ -1,0 +1,363 @@
+<!DOCTYPE>
+<html>
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DataLab</title>
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+<section id="container">
+    <header id="header">
+        <!--logo start-->
+        <div class="brand">
+            <a href="index.html" class="logo">
+                <i class="glyphicon glyphicon-stats"></i>
+                <span>Data</span>Lab</a>
+        </div>
+        <div class="help">
+            <i class="glyphicon glyphicon-question-sign	"></i>
+        </div>
+    </header>
+
+    <!--main content start-->
+    <section class="main-content-wrapper" >
+        <div class="col-md-12">
+            <!--breadcrumbs start -->
+            <h1 class="h1">客户综合分析</h1>
+            <ul class="breadcrumb">
+                <li><a href="#">热门航线</a>
+                </li>
+                <li><a>热门港口</a></li>
+                <!--class="active"-->
+                <li><a>热门船公司</a></li>
+                <li><a>活跃客户</a></li>
+            </ul>
+            <!--breadcrumbs end -->
+
+        </div>
+        <section id="main-content">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">航海路线</h3>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div id="lineMap" style="height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">咨询(待定)</h3>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="map" id="informa" style="height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </section>
+
+</section>
+<script src="assets/plugins/jquery-1.10.2.min.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!--<script src="js/esl.js"></script>-->
+<script src="js/echarts/echarts.js"></script>
+<script src="js/echarts-x/echarts-x.js"></script>
+<script src="js/theme/vintage.js"></script>
+<!--<script src="assets/script/analyse1.js"></script>-->
+<script>
+
+    function test(){
+        $(".actions > .fa-chevron-down").click(function(){$(this).parent().parent().next().slideToggle("fast"),$(this).toggleClass("fa-chevron-down fa-chevron-up")})
+    }
+    test();
+    function initMap(url,title){
+        require.config({
+            paths: {
+                'echarts': 'js/echarts',
+                'echarts-x': 'js/echarts-x'
+            }
+        });
+        require([
+            'echarts',
+            'echarts-x',
+            // ECharts-X 中 map3d 的地图绘制基于 ECharts 中的 map。
+            'echarts/chart/map',
+            'echarts-x/chart/map3d'
+        ], function (ec) {
+            var myChart = ec.init(document.getElementById('lineMap'));
+            myChart.showLoading();
+            var ecConfig = require('echarts/config');
+            $.ajax({
+                url: url,
+                success: function (data) {
+                    var markPointStyle = {
+                        normal: {
+                            color: 'red'
+                        }
+                    };
+                    var max = -Infinity;
+                    var min = Infinity;
+                    // Airport: [name, city, country, longitude, latitude]
+                    var airports = data.airports.map(function (item) {
+                        return {
+
+                            geoCoord: [item[3], item[4]],
+                            distance: Math.random(),
+                            symbolSize : Math.random()+2,
+                            value:Math.random()+1
+                        }
+                    });
+
+                    // Route: [airlineIndex, sourceAirportIndex, destinationAirportIndex]
+                    var routesGroupByAirline = {};
+                    data.routes.forEach(function (route) {
+                        var airline = data.airlines[route[0]];
+                        var airlineName = airline[0];
+                        if (!routesGroupByAirline[airlineName]) {
+                            routesGroupByAirline[airlineName] = [];
+                        }
+                        routesGroupByAirline[airlineName].push(route);
+                    });
+
+                    var opts = {
+                        title: {
+                            text: title,
+                            subtext: 'Data from openflights.org',
+
+                            x:'LEFT',
+                            y:'top',
+                            textStyle: {
+                                color: 'black'
+                            }
+                        },
+                        dataRange: {
+                            min: 0,
+                            max: max,
+                            text:['High','Low'],
+                            realtime: false,
+                            calculable : true,
+                            color: ['red','yellow','lightskyblue']
+                        },
+                        tooltip: {
+                            formatter: '{b}'
+                        },
+                        series: [{
+                            type: 'map3d',
+                            mapType: 'world',
+                            roam:{autoRotate:false,
+                                focus:"China"},
+                            baseLayer: {
+                                backgroundColor: '',
+                                backgroundImage: 'asset/earth.jpg'
+                            },
+                            itemStyle: {
+                                normal: {
+                                    borderWidth: 1,
+                                    borderColor: 'yellow',
+                                    areaStyle: {
+                                        color: 'rgba(0, 0, 0, 0)'
+                                    }
+                                }
+                            },
+                            markPoint: {
+                                effect: {
+                                    shadowBlur: 0.4,
+                                    show:true
+                                },
+//                                symbol:'triangle',
+                                large: true,
+//                                symbolSize: 10,
+                                data: airports
+                            }
+                        }]
+                    };
+
+//                opts.legend.data.forEach(function (name) {
+//                    if (name.indexOf('American Airlines') >= 0) {
+//                        opts.legend.selected[name] = true;
+//                    } else {
+//                        opts.legend.selected[name] = false;
+//                    }
+//                });
+
+                    var lineStyle={
+                        width: 8,
+                        // 线的透明度
+                        opacity: 0.7
+                    };
+
+                    data.airlines.forEach(function (item) {
+                        var airlineName = item[0];
+                        var routes = routesGroupByAirline[airlineName];
+                        var i=1;
+                        if (routes) {
+                            opts.series.push({
+                                type: 'map3d',
+                                name: airlineName,
+//                            roam:{autoRotate:false},
+                                tooltip : {
+                                    trigger: 'item',
+                                    formatter: function (v) {
+                                        return v[1].replace(':', ' > ');
+                                    }
+                                },
+                                markLine: {
+                                    itemStyle: {
+                                        normal: {
+
+                                            width: 4,
+                                            color:'red',
+                                            // 线的透明度
+                                            opacity: 0.2
+                                        }
+                                    },
+                                    effect: {
+                                        show: true
+//                                    loop: true,
+//                                    period: 15,
+//                                    scaleSize : 2,
+//                                    color : null,
+//                                    shadowColor : null,
+//                                    shadowBlur : null
+
+                                    },
+                                    data: routes.map(function (item) {
+                                        var rey=[{
+                                            // Source airport
+                                            geoCoord: airports[item[1]].geoCoord
+                                        }, {
+                                            // Destination Airport
+                                            geoCoord: airports[i].geoCoord
+                                        }
+//                                        ,{
+//                                        itemStyle:{
+//                                            width: 8,
+//                                            // 线的透明度
+//                                            opacity: 0.7
+//                                        }
+//                                    }
+                                        ];
+                                        i++;
+                                        return  rey
+                                    })
+                                }
+                            });
+                        }
+                    });
+
+                    //MAP_SELECTED
+                    myChart.on(ecConfig.EVENT.CLICK, function (param) {
+                        var name = param.name;
+
+                        lineChart()
+                    });
+
+                    myChart.setOption(opts);
+                    myChart.hideLoading();
+                }
+            });
+        })
+    }
+
+    function changeData(){
+
+        initMap('data/test.json','test');
+
+    }
+    function lineChart(){
+        require.config({
+            paths: {
+                'echarts': 'js/echarts'
+            }
+        });
+        require([
+            'echarts',
+            'echarts/chart/line',   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+            'echarts/chart/bar'
+        ], function (ec) {
+            var testLine = ec.init(document.getElementById('informa'));
+            var option = {
+                tooltip : {
+                    trigger: 'axis'
+                },
+
+                calculable : true,
+                xAxis : [
+                    {
+                        type : 'category',
+                        boundaryGap : false,
+                            data : ['A','B','C','D','E','F','G']
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value'
+                    }
+                ],
+                series : [
+                    {
+                        name:'邮件营销',
+                        type:'line',
+                        stack: '总量',
+                        data:[120, 132, 101, 134, 90, 230, 210]
+                    },
+                    {
+                        name:'联盟广告',
+                        type:'line',
+                        stack: '总量',
+                        data:[220, 182, 191, 234, 290, 330, 310]
+                    },
+                    {
+                        name:'视频广告',
+                        type:'line',
+                        stack: '总量',
+                        data:[150, 232, 201, 154, 190, 330, 410]
+                    },
+                    {
+                        name:'直接访问',
+                        type:'line',
+                        stack: '总量',
+                        data:[320, 332, 301, 334, 390, 330, 320]
+                    },
+                    {
+                        name:'搜索引擎',
+                        type:'line',
+                        stack: '总量',
+                        data:[820, 932, 901, 934, 1290, 1330, 1320]
+                    }
+                ]
+            };
+            testLine.setOption(option);
+        });
+
+    }
+
+
+    changeData();
+</script>
+</body>
+
+</html>

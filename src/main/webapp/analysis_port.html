@@ -1,0 +1,315 @@
+
+<html>
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="Shortcut Icon" href="asset/logo.png" />
+    <title>海运报价可视化</title>
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/bootstrap-select.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/analysis_port.css">
+    
+    <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+    <!--<script src="assets/plugins/icheck/js/icheck.min.js"></script>-->
+
+</head>
+
+<body>
+ <div id="loadbg"></div>
+ <div class="loader"></div>
+<section id="container">
+    <header id="header">
+        <!--logo start-->
+        <div class="brand">
+            <a href="home.html" class="logo">
+               <!--  <i class="glyphicon glyphicon-stats"></i> -->
+                <span>海运报价</span>可视化</a>
+        </div>
+        <!--navigation bar start-->
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(4)"><i class="fa fa-thumb-tack"style="margin-right: 10px;"></i>仪表盘</button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(0)">
+                <i class="fa fa-home" style="margin-right: 10px;"></i>最新报价
+            </button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" style="color: white;background-color: #1abc9c;">
+                <i class="fa fa-thumb-tack"style="margin-right: 10px;"></i>港口运力比</button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans"  onclick="changepage(2)"><i class="fa fa-tachometer"style="margin-right: 10px;"></i>船公司对比</button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(3)"><i class="fa fa-globe"style="margin-right: 10px;"></i>船公司详情</button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans"><i class="fa fa-users"style="margin-right: 10px;"></i>用户行为图</button>
+        </div>
+        <!--navigation bar end-->
+        <div class="help" >
+            <i class="glyphicon glyphicon-signal btn btn-primary btn-trans " data-toggle="tooltip" data-placement="left" title="数据统计信息总览" onclick="changepage(5)"></i>
+        </div>
+    </header>
+
+    <!--main content start-->
+    <section class="main-content-wrapper" >
+
+        <section id="main-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">输入筛选条件
+                                <span id="lbl_startPort" class="label label-info "></span>
+                                <span id="lbl_endPort" class="label label-info "></span>
+                                <span id="lbl_priceType" class="label label-info "></span>
+                            </h3>
+
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+                                <!--<i class="fa fa-times"></i>-->
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form">
+                                <div class="form-group">
+                                    <div class="col-sm-3">                                    
+                                    <label for="portStartName">起运港</label>
+                                    <select id="portStartName" name="portStartName" class="selectpicker show-tick form-control"  data-live-search="true" data-live-search-style="begins" onchange="getStartPort(this.options[this.selectedIndex].text)"></select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="portEndName">目的港</label>
+                                        <select id="portEndName" name="portEndName" class="selectpicker show-tick form-control"  data-live-search="true" data-live-search-style="begins" onchange="getEndPort(this.options[this.selectedIndex].text)"></select>                                        
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label for="portEndName">开始时间</label>
+                                        <input size="16" type="text" value="" readonly class="form_datetime form-control" id="timeStart">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label for="portEndName">结束时间</label>
+                                        <input size="16" type="text" value="" readonly class="form_datetime form-control" id="timeEnd">           
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label for="priceType">规格</label>
+                                        <select id="priceType" name="priceType" class="selectpicker show-tick form-control"  data-live-search="false" onchange="getPriceType(this.options[this.selectedIndex].text)">
+                                        <option value="0">未选择</option>
+										<option value="price20">20规格</option>
+										<option value="price40">40规格</option>
+										<option value="price40h">40H规格</option>
+                                        </select>                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12" >
+                                        <button type="button" class="btn btn-primary btn-trans" onclick="getPortPriceData();" style="margin-top: 10px;float: right;">提交</button>
+                                    </div>
+
+                                </div>
+
+
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">比较不同船公司在时间段价格趋势
+                            </h3>
+                            <div class="info-icon" id="changeHelp" >
+			                    <i type="button" class="glyphicon glyphicon-info-sign popover-bottom" data-container="body" data-toggle="popover" data-placement="bottom"
+			                     data-content="根据选择时间段，展示符合条件的船公司报价趋势。">
+			                    </i>
+		                    </div>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div id="lineChart" style="height: 400px;width:100%;padding:10px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" id="new">最新报价</h3>
+                            <div class="info-icon" id="changeHelp" >
+			                    <i type="button" class="glyphicon glyphicon-info-sign popover-bottom" data-container="body" data-toggle="popover" data-placement="bottom"
+			                     data-content="根据起始港，目的港显示最新有报价记录的船公司的最新规格报价。">
+			                    </i>
+		                    </div>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div id="barChart" style="height: 400px;width:100%;padding:10px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">按月报价比较
+                            </h3>
+                            <div class="info-icon" >
+			                    <i type="button" class="glyphicon glyphicon-info-sign popover-bottom" data-container="body" data-toggle="popover" data-placement="bottom"
+			                     data-content="比较最新报价船公司的每月平均报价。即根据船公司检索历史报价记录，得出每月的平均报价后比较。">
+			                    </i>
+		                    </div>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div id="lineChart1" style="height: 400px;width:100%;padding:10px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">最新开船日期
+                            </h3>
+                            <div class="info-icon" >
+			                    <i type="button" class="glyphicon glyphicon-info-sign popover-bottom" data-container="body" data-toggle="popover" data-placement="bottom"
+			                     data-content="比较最新报价船公司的最新开船日期。">
+			                    </i>
+		                    </div>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div id="LastStart" style="height: 400px;width:100%;padding:10px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">最新截关日期</h3>
+                            <div class="info-icon" >
+			                    <i type="button" class="glyphicon glyphicon-info-sign popover-bottom" data-container="body" data-toggle="popover" data-placement="bottom"
+			                     data-content="比较最新报价船公司的最新截关日期。">
+			                    </i>
+		                    </div>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div id="LastEnd" style="height: 400px;width:100%;padding:10px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">往期开船工作日分析
+                            </h3>
+                            <div class="info-icon" >
+			                    <i type="button" class="glyphicon glyphicon-info-sign popover-bottom" data-container="body" data-toggle="popover" data-placement="bottom"
+			                     data-content="根据筛选条件，分析往期船公司的开船日期频次。">
+			                    </i>
+		                    </div>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div id="heatmapChart" style="height: 400px;width:100%;padding:10px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section class="main-content-wrapper" >
+        <div style="text-align: center;" >
+            <span>Copyright©2016 宁波数联软件有限公司  0574-27880887 |</span> <span style="padding-left: 20px;">浙ICP备16000800号-1</span>
+        </div>
+    </section>
+</section>
+<script src="assets/plugins/jquery-1.10.2.min.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<!--<script src="js/esl.js"></script>-->
+<script src="assets/plugins/bootstrap-select.min.js"></script>
+<script src="assets/plugins/bootstrap-datetimepicker.min.js"></script>
+<script src="assets/plugins/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<script src="js/echarts.js"></script>
+<script src="js/echarts-x/echarts-x.js"></script>
+<script src="assets/script/app.js"></script>
+<script src="assets/script/portCapacity.js"></script>
+<script src="assets/script/service/portCapacityService.js"></script>
+<script src="js/theme/vintage.js"></script>
+<script>
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+    function test(){
+        $(".actions > .fa-chevron-down").click(function(){$(this).parent().parent().next().slideToggle("fast"),$(this).toggleClass("fa-chevron-down fa-chevron-up")})
+    }
+    test();
+    //添加时间：2016年11月1日21:52:17
+    //添加人：周思硕
+    getPortData();
+    $(".form_datetime").datetimepicker({
+    	format: 'yyyy-mm-dd',
+	      autoclose: 1,
+	      todayHighlight: 1,
+	      viewSelect:2    ,
+	      minView:2,
+	      todayBtn:"linked",
+	      language: 'zh-CN',
+	      showMeridian:'day'
+    });
+    function getStartPort(text){
+        
+      //  if(text != ""){
+      //  	lbl_startPort.innerText= "起运港：" + text;
+      //  }
+      //不加else不可以，如果上一次的数据存在，select选择空的时候，label标签不会变化
+      //  else
+       // 	lbl_startPort.innerText= "";   
+    	lbl_startPort.innerText= "起运港：" + text;       
+    }
+
+    function getEndPort(text){
+    	lbl_endPort.innerText= "目的港：" + text;        
+    }
+
+    function getPriceType(text){
+    	lbl_priceType.innerText= "规格：" + text;        
+    }
+
+</script>
+
+</body>
+
+</html>

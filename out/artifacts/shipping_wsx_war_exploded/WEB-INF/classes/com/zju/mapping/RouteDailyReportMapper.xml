@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zju.dao.RouteDailyReportMapper">
+
+    <select id="selectRouteAnnuallyQuotationAmountByYear" resultType="com.zju.model.RouteAnnuallyQuotationCount">
+        SELECT
+            route.route_key AS routeKey,
+	        route.name_cn AS routeName,
+	        SUM(report.new_quotation_count) AS count
+        FROM warehouse_fact_route_daily_report AS report
+	        JOIN warehouse_route AS route ON report.route_key = route.route_key
+	        JOIN warehouse_date AS date ON report.date_key = date.date_key
+        WHERE date.year = #{year}
+        GROUP BY report.route_key
+        ORDER BY count DESC
+        LIMIT 10
+    </select>
+
+
+    <select id="selectRouteAmountOfRecentTwoYears" resultType="com.zju.model.AnnuallyCount">
+        SELECT
+	        date.year,
+	        COUNT(DISTINCT report.route_key) AS count
+        FROM warehouse_fact_route_daily_report AS report
+	        JOIN warehouse_date AS date ON report.date_key = date.date_key
+        GROUP BY date.year
+        ORDER BY date.year DESC
+        LIMIT 2
+    </select>
+
+
+    <select id="selectMonthlyQuotationCountByYear" resultType="com.zju.model.MonthlyCount">
+        SELECT
+	        date.month AS month,
+	        SUM(report.new_quotation_count) as count
+        FROM warehouse_fact_route_daily_report AS report
+	        JOIN warehouse_date AS date ON report.date_key = date.date_key
+        WHERE date.year = #{year}
+              AND date.date &lt;= CURDATE()
+        GROUP BY date.year, date.month
+    </select>
+
+    <select id="selectThisYearQuotationCount" resultType="com.zju.model.AnnuallyCount">
+        SELECT
+            date.year AS year,
+            SUM(report.new_quotation_count) AS count
+        FROM warehouse_fact_route_daily_report AS report
+            JOIN warehouse_date AS date ON report.date_key = date.date_key
+        GROUP BY date.year
+        ORDER BY date.year DESC
+        LIMIT 1
+    </select>
+
+</mapper>

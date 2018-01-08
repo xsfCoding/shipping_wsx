@@ -1,0 +1,298 @@
+<html>
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="Shortcut Icon" href="asset/logo.png" />
+    <title>海运报价可视化</title>
+    <link rel="stylesheet"
+          href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/bootstrap-select.min.css">
+    <link rel="stylesheet" href="assets/plugins/table/bootstrap-table.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/analysis_port.css">
+
+    <!--<script src="assets/plugins/icheck/js/icheck.min.js"></script>-->
+
+</head>
+
+<body>
+ <div id="loadbg"></div>
+ <div class="loader"></div>
+<section id="container">
+    <header id="header">
+        <!--logo start-->
+        <div class="brand">
+            <a  class="logo">
+                    <span>海运报价</span>可视化
+            </a>
+        </div>
+        <!--navigation bar start-->
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(4)"><i class="fa fa-thumb-tack"style="margin-right: 10px;"></i>仪表盘</button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans"
+                    onclick="changepage(0)">
+                <i class="fa fa-home" style="margin-right: 10px;"></i>最新报价
+            </button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans"
+                    onclick="changepage(1)">
+                <i class="fa fa-thumb-tack" style="margin-right: 10px;"></i>港口运力比
+            </button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans"
+
+                    onclick="changepage(2)">
+                <i class="fa fa-tachometer" style="margin-right: 10px;"></i>船公司对比
+            </button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans"
+                    style="color: white; background-color: #1abc9c;"onclick="changepage(3)">
+                <i class="fa fa-globe" style="margin-right: 10px;"></i>船公司详情
+            </button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans">
+                <i class="fa fa-users" style="margin-right: 10px;"></i>用户行为图
+            </button>
+        </div>
+        <!--navigation bar end-->
+       <div class="help" >
+           <i class="glyphicon glyphicon-signal btn btn-primary btn-trans " data-toggle="tooltip" data-placement="left" title="数据统计信息总览" onclick="changepage(5)"></i>
+       </div>
+    </header>
+
+    <!--main content start-->
+    <section class="main-content-wrapper">
+
+        <section id="main-content">
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">船公司港口概况</h3>
+                            <div class="info-icon" >
+			                    <i type="button" class="glyphicon glyphicon-info-sign popover-bottom" data-container="body" data-toggle="popover" data-placement="bottom"
+			                     data-content="根据选择船公司，展示该船公司历史报价记录涵盖的港口地理位置和出现频次。">
+			                    </i>
+		                    </div>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                        <form role="form">
+									<div class="form-group">
+										<div class="col-sm-5">
+											<label for="ship"></label>
+											<select id="ship" name="ship" class="selectpicker show-tick form-control"  
+											data-live-search="true" data-live-search-style="begins">
+											</select>												
+										</div>
+										<!-- <div class="col-sm-3">
+										    <label for="priceType"></label>
+	                                        <select id="priceType" name="priceType" class="selectpicker show-tick form-control"  data-live-search="false" onchange="getEndPort(this.options[this.selectedIndex].text)">
+	                                        <option value="0">-选择规格-</option>
+											<option value="price20">20规格</option>
+											<option value="price40">40规格</option>
+											<option value="price40h">40H规格</option>
+	                                        </select>                                        
+	                                    </div> -->
+										<div class="col-sm-4">
+											<button type="button" class="btn btn-primary btn-trans"
+												onclick="initCharts();" style="margin-top: 4px;">查询</button>
+										</div>
+									</div>
+								</form>
+                            <div id="mapChart" style="height: 580px; width: 100%; padding: 10px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">港口航线分析</h3>
+                            <div class="info-icon" >
+			                    <i type="button" class="glyphicon glyphicon-info-sign popover-bottom" data-container="body" data-toggle="popover" data-placement="bottom"
+			                     data-content="根据选择船公司，展示该船公司历史报价记录涵盖的出现频次最高的热门港口和航线。">
+			                    </i>
+		                    </div>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+
+                            <!--<div style="height: 105px; width: 100%;">-->
+                                <div class="tab-wrapper tab-bottom tab-primary">
+                                    <div class="tab-content" style="height: 520px;">
+                                        <div class="tab-pane active" id="tab1">
+                                            <div id="pieChart" style="height: 500px; width: 400px;"></div>
+                                        </div>
+                                        <div class="tab-pane" id="tab2">
+                                            <div id="barChart" style="height: 500px; width: 450px; margin: 0;"></div>
+                                        </div>
+
+                                    </div>
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#tab1" data-toggle="tab"
+                                                              onclick="getChart(1)">港口</a></li>
+                                        <li><a href="#tab2" data-toggle="tab"
+                                               onclick="getChart(2)">航线</a></li>
+                                    </ul>
+                                </div>
+                            <!--</div>-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">报价表单</h3>
+                            <div class="info-icon" >
+			                    <i type="button" class="glyphicon glyphicon-info-sign popover-bottom" data-container="body" data-toggle="popover" data-placement="bottom"
+			                     data-content="根据选择船公司，展示该船公司最新的100条报价数据。">
+			                    </i>
+		                    </div>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div id="charts"
+                                 style="height: 320px; width: 100%; padding: 10px;">
+
+                                <div style="width: 100%;height: 200px;float: left;">
+                                    <table id="mytab" class="table table-hover"></table>
+
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section class="main-content-wrapper" >
+        <div style="text-align: center;" >
+            <span>Copyright©2016 宁波数联软件有限公司  0574-27880887 |</span> <span style="padding-left: 20px;">浙ICP备16000800号-1</span>
+        </div>
+    </section>
+</section>
+<script src="assets/plugins/jquery-1.10.2.min.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/plugins/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="assets/plugins/table/bootstrap-table.min.js"></script>
+<script src="assets/plugins/table/bootstrap-table-zh-CN.min.js"></script>
+<script src="assets/plugins/bootstrap-select.min.js"></script>
+<!--<script src="js/esl.js"></script>-->
+<script src="js/echarts/echarts.js"></script>
+<script src="js/echarts-x/echarts-x.js"></script>
+<script src="assets/script/app.js"></script>
+<script src="assets/script/companyPaticular.js"></script>
+<script src="js/theme/macarons.js"></script>
+<script src="assets/script/service/companyPaticularService.js"></script>
+<script>
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+    function test() {
+        $(".actions > .fa-chevron-down").click(
+                function() {
+                    $(this).parent().parent().next().slideToggle("fast"),
+                            $(this).toggleClass(
+                                    "fa-chevron-down fa-chevron-up")
+                });
+
+        $('#reportTable').bootstrapTable({
+            method: 'get',
+            url: 'data/table.json',
+            dataType: "json",
+            striped: true,	 //使表格带有条纹
+            pagination: true,	//在表格底部显示分页工具栏
+            pageSize: 22,
+            pageNumber: 1,
+            pageList: [10, 20, 50, 100, 200, 500],
+            idField: "ProductId",  //标识哪个字段为id主键
+            showToggle: false,   //名片格式
+            cardView: false,//设置为True时显示名片（card）布局
+            showColumns: true, //显示隐藏列
+            showRefresh: true,  //显示刷新按钮
+            singleSelect: true,//复选框只能选择一条记录
+            search: false,//是否显示右上角的搜索框
+            clickToSelect: true,//点击行即可选中单选/复选框
+            sidePagination: "server",//表格分页的位置
+//				queryParams: queryParams, //参数
+            queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求
+            toolbar: "#toolbar",//设置工具栏的Id或者class
+//				columns: column, //列
+            silent: true,  //刷新事件必须设置
+            formatLoadingMessage: function () {
+                return "请稍等，正在加载中...";
+            },
+            formatNoMatches: function () {  //没有匹配的结果
+                return '无符合条件的记录';
+            },
+            onLoadError: function (data) {
+                $('#reportTable').bootstrapTable('removeAll');
+            },
+            onClickRow: function (row) {
+                window.location.href = "/qStock/qProInfo/" + row.ProductId;
+            }
+        });
+
+
+    }
+    test();
+    $(function() {
+        $('#mytab').bootstrapTable({
+//				url: "data/table.json",//数据源
+            search: true,//是否搜索
+            pagination: true,//是否分页
+            pageSize: 5,//单页记录数
+            showColumns: true,//列选择按钮
+            dataField: "rows",//服务端返回数据键值 就是说记录放的键值是rows，分页时使用总记录数的键值为total
+            pageList: [5, 10, 20, 50],//分页步进值
+            'data-locale':"zh-US",
+            dataType: "json",//期待返回数据类型
+            method: "post",//请求方式
+            columns: [{
+                field: 'column1',
+                title: '列名1',
+                sortable: true
+            }, {
+                field: 'column2',
+                title: '列名2',
+                sortable: true
+            }, {
+                field: 'column3',
+                title: '列名3',
+                sortable: true
+            }],
+            data:[]
+        });
+
+    });
+
+
+
+</script>
+
+</body>
+
+</html>

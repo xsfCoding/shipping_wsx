@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="Shortcut Icon" href="asset/logo.png" />
+    <title>海运报价可视化</title>
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/plugins/bootstrap-select.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+
+</head>
+
+<body>
+<div id="loadbg"></div>
+<div class="loader"></div>
+<section id="container">
+    <header id="header">
+        <!--logo start-->
+        <div class="brand">
+            <a   class="logo">
+
+                <span>海运报价</span>可视化</a>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(4)"><i class="fa fa-thumb-tack"style="margin-right: 10px;"></i>仪表盘</button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" style="color: white;background-color: #5bbc44;">
+                <i class="fa fa-home" style="margin-right: 10px;"></i>最新报价
+            </button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(1)"><i class="fa fa-thumb-tack"style="margin-right: 10px;"></i>港口运力比</button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(2)"><i class="fa fa-tachometer"style="margin-right: 10px;"></i>船公司对比</button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(3)"><i class="fa fa-globe"style="margin-right: 10px;"></i>船公司详情</button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans"><i class="fa fa-users"style="margin-right: 10px;"></i>用户行为图</button>
+        </div>
+        <div class="help" >
+            <i class="glyphicon glyphicon-signal btn btn-primary btn-trans " data-toggle="tooltip" data-placement="left" title="数据统计信息总览" onclick="changepage(5)"></i>
+        </div>
+    </header>
+
+    <!--main content start-->
+    <section class="main-content-wrapper" >
+
+        <section id="main-content">
+
+            <!--tiles start-->
+            <div class="row">
+                <div class="col-md-8">
+                    <button class="btn btn-primary btn-trans" data-toggle="modal" data-target="#formModal" style="float: left">
+                        <i class="fa fa-search">航线查询</i>
+                    </button>
+                    <div style="float: right;padding: 10px;">
+                        <i type="button" class="glyphicon glyphicon-info-sign popover-bottom" data-container="body" data-toggle="popover" data-placement="bottom"
+                           data-content="根据航线查询当日(0点为基准)所有港口报价,默认展示所有当日港口和报价。">
+                        </i>
+                    </div>
+                    <div id="mainMap" style="height: 600px;width: 100%;"></div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">港口最新报价</h3>
+                            <div class="info-icon" id="changeHelp" >
+                                <i type="button" class="glyphicon glyphicon-info-sign popover-bottom" data-container="body" data-toggle="popover" data-placement="bottom"
+                                   data-content="报价频次前十港口的最新常用规格报价。若点击国家，将展示选中国家的最新报价中涵盖的各个港口的报价。">
+                                </i>
+                            </div>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+
+                            <div id="informa" style="height: 300px;">
+
+                            </div>
+                            <div id="informa2">
+                                <table id="mytab" class="table table-hover" style="text-align:center"></table>
+                            </div>
+
+                            <!--<div id="" style="height: 300px;">-->
+                            <!--<div class="tab-wrapper tab-bottom tab-primary">-->
+                            <!--<div class="tab-content"style="height: 250px;">-->
+                            <!--<div class="tab-pane active" id="home2">-->
+                            <!--<p>信息1热门港口.-->
+                            <!--</p>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash; <div class="tab-pane" id="profile2">-->
+                            <!--<p>-->
+                            <!--信息2热门航线-->
+                            <!--</p>-->
+                            <!--</div> &ndash;&gt;-->
+                            <!--</div>-->
+                            <!--<ul class="nav nav-tabs">-->
+                            <!--<li class="active"><a href="#home2" data-toggle="tab">热门港口</a>-->
+                            <!--</li>-->
+                            <!--&lt;!&ndash;  <li><a href="#profile2" data-toggle="tab">热门航线</a>-->
+                            <!--</li> &ndash;&gt;-->
+                            <!--</ul>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </section>
+    </section>
+    <section class="main-content-wrapper" style="margin-top: 40px;">
+        <div style="text-align: center;" >
+            <span>Copyright©2016 宁波数联软件有限公司  0574-27880887 |</span> <span style="padding-left: 20px;">浙ICP备16000800号-1</span>
+        </div>
+    </section>
+</section>
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">航线港口查询</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label  class="col-sm-2 control-label">选择航线</label>
+                        <div class="col-sm-10">
+                            <!-- <input type="text" class="form-control" id="input3" placeholder="选择航线"> -->
+                            <select id="usertype" name="usertype" class="selectpicker show-tick form-control"  data-live-search="true" data-live-search-style="begins">
+
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="input1" class="col-sm-2 control-label">选择港口</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="input1" placeholder="选择港口">
+                        </div>
+                    </div> -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="searchLine()">查询</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/plugins/jquery-1.10.2.min.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/plugins/bootstrap-select.min.js"></script>
+<script src="assets/plugins/table/bootstrap-table.min.js"></script>
+<script src="js/esl.js"></script>
+<script src="js/echarts/echarts.js"></script>
+<script src="js/echarts-x/echarts-x.js"></script>
+<script src="js/theme/vintage.js"></script>
+<script src="assets/script/app.js"></script>
+<script src="assets/script/home.js"></script>
+<script src="assets/script/service/homeService.js"></script>
+
+
+<script>
+
+    function test(){$(".actions > .fa-chevron-down").click(function(){$(this).parent().parent().next().slideToggle("fast"),$(this).toggleClass("fa-chevron-down fa-chevron-up")})}
+    test();
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+    require.config({
+        paths: {
+            'echarts': 'js/echarts',
+            'echarts-x': 'js/echarts-x'
+        }
+    });
+
+    initCharts('-1');
+</script>
+
+</body>
+
+</html>

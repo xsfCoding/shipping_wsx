@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zju.dao.PortMapper">
+
+    <select id="selectAllNames" resultType="com.zju.model.Port">
+        SELECT
+            port_key AS portKey,
+            name
+        FROM warehouse_port
+        ORDER BY name_en ASC
+    </select>
+
+
+    <resultMap id="countryPorts" type="com.zju.model.CountryPorts">
+        <result property="countryName" column="country"/>
+        <result property="portKeys" column="ports" typeHandler="com.zju.typehandler.StringToIntArrayTypeHandler"/>
+    </resultMap>
+
+    <select id="groupByCountry" resultMap="countryPorts">
+        SELECT country_cn AS country,
+	        GROUP_CONCAT(port_key ORDER BY port_key ASC SEPARATOR ' ') AS ports
+        FROM warehouse_port
+        GROUP BY country_cn
+    </select>
+
+
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zju.dao.CompanyDailyReportMapper">
+
+    <select id="selectCompanySummaryReportByCompany" resultMap="companySummaryReport">
+        SELECT
+			c.company_key AS company_key,
+			c.name_cn AS company_name,
+			SUM(report.new_quotation_count) AS quotation,
+			SUM(report.new_route_count) AS route,
+			SUM(report.new_port_count) AS port
+		FROM warehouse_fact_company_daily_report AS report
+			JOIN warehouse_company AS c ON c.company_key = report.company_key
+		WHERE c.company_key = #{companyKey}
+    </select>
+
+    <resultMap id="companySummaryReport" type="com.zju.model.CompanySummaryReport">
+        <id property="companyKey" column="company_key"/>
+        <result property="companyName" column="company_name"/>
+        <result property="quotationCount" column="quotation"/>
+        <result property="routeCount" column="route"/>
+        <result property="portCount" column="port"/>
+    </resultMap>
+
+    <select id="selectCompanyReportMax" resultType="com.zju.model.CompanyReportMax">
+        SELECT
+            MAX(quotation) AS quotation,
+            MAX(route) AS route,
+            MAX(port) AS port
+        FROM (
+            SELECT
+                SUM(new_quotation_count) AS quotation,
+                SUM(new_route_count) AS route,
+                SUM(new_port_count) AS port
+            FROM warehouse_fact_company_daily_report
+            GROUP BY company_key
+        ) AS t
+    </select>
+
+
+    <select id="selectCompanyAnnuallyTopTenQuotationByYear" resultType="com.zju.model.CompanyAnnuallyQuotationCount">
+        SELECT
+            company.company_key AS companyKey,
+            company.name_cn AS companyName,
+            SUM(report.new_quotation_count) AS count
+        FROM warehouse_fact_company_daily_report AS report
+            JOIN warehouse_company AS company ON report.company_key = company.company_key
+            JOIN warehouse_date AS date ON report.date_key = date.date_key
+        WHERE date.year = #{year}
+        GROUP BY report.company_key
+        ORDER BY count DESC
+        LIMIT 10
+    </select>
+
+
+    <select id="selectCompanyAmountOfRecentTwoYears" resultType="com.zju.model.AnnuallyCount">
+        SELECT
+	        date.year AS year,
+	        COUNT(DISTINCT report.company_key) AS count
+        FROM warehouse_fact_company_daily_report AS report
+	        JOIN warehouse_date AS date ON report.date_key = date.date_key
+        GROUP BY date.year
+        ORDER BY date.year DESC
+        LIMIT 2
+    </select>
+
+</mapper>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zju.dao.VoyageMonthlyReportMapper">
+    <select id="selectCompanyMonthlyAVGPriceByVoyageAndDateRange" resultMap="companyMonthlyAVGPriceResultMap">
+        SELECT
+        companyName.company_key AS company_key,
+        companyName.name_cn AS companyName,
+        date.month AS month,
+        <choose>
+            <when test="priceType == 'price20'">
+                ROUND(AVG(report.avg_price_20gp),2) AS price
+            </when>
+            <when test="priceType == 'price40'">
+                ROUND(AVG(report.avg_price_40gp),2) AS price
+            </when>
+            <otherwise>
+                ROUND(AVG(report.avg_price_40hq),2) AS price
+            </otherwise>
+        </choose>
+        FROM warehouse_fact_voyage_monthly_report AS report
+        JOIN warehouse_date AS date ON report.date_key = date.date_key
+        JOIN warehouse_company AS companyName ON report.company_key = companyName.company_key
+        WHERE report.starting_port_key = #{startingPortKey}
+        AND report.destination_port_key = #{destinationPortKey}
+        AND date.date BETWEEN #{fromDate} AND #{toDate}
+        GROUP BY companyName.company_key, date.month
+    </select>
+
+    <resultMap id="companyMonthlyAVGPriceResultMap" type="com.zju.model.CompanyMonthlyAVGQuotation">
+        <id property="companyKey" column="company_key"/>
+        <result property="companyName" column="companyName"/>
+        <result property="month" column="month"/>
+        <result property="price" column="price"/>
+    </resultMap>
+
+    <select id="selectCompanySetSailDatesByVoyageAndDateRange" resultMap="companySetSailDatesResultMap">
+        SELECT
+            companyName.company_key AS company_key,
+	        companyName.name_cn AS companyName,
+	        SUM(setsail_count_day1) AS setsail_day1,
+	        SUM(setsail_count_day2) AS setsail_day2,
+	        SUM(setsail_count_day3) AS setsail_day3,
+	        SUM(setsail_count_day4) AS setsail_day4,
+	        SUM(setsail_count_day5) AS setsail_day5,
+	        SUM(setsail_count_day6) AS setsail_day6,
+	        SUM(setsail_count_day7) AS setsail_day7
+        FROM warehouse_fact_voyage_monthly_report AS report
+	        JOIN warehouse_date AS date ON report.date_key = date.date_key
+	        JOIN warehouse_company AS companyName ON report.company_key = companyName.company_key
+        WHERE report.starting_port_key = #{startingPortKey}
+	        AND report.destination_port_key = #{destinationPortKey}
+	        AND date.date BETWEEN #{fromDate} AND #{toDate}
+        GROUP BY companyName.company_key
+    </select>
+
+    <resultMap id="companySetSailDatesResultMap" type="com.zju.model.CompanySetSailDates">
+        <id property="companyKey" column="company_key"/>
+        <result property="company" column="companyName"/>
+        <result property="d1" column="setsail_day1"/>
+        <result property="d2" column="setsail_day2"/>
+        <result property="d3" column="setsail_day3"/>
+        <result property="d4" column="setsail_day4"/>
+        <result property="d5" column="setsail_day5"/>
+        <result property="d6" column="setsail_day6"/>
+        <result property="d7" column="setsail_day7"/>
+    </resultMap>
+
+    <select id="selectCompanyQuarterAVGQuotation" resultType="com.zju.model.CompanyQuarterAVGQuotation">
+        SELECT
+            c.company_key AS companyKey,
+            c.name_cn AS companyName,
+            d.quarter AS quarter,
+            COUNT(*) AS count,
+            ROUND(AVG(avg_price_20gp),2) AS price20,
+            ROUND(AVG(avg_price_40gp),2) AS price40,
+            ROUND(AVG(avg_price_40hq),2) AS price40h,
+            ROUND(AVG(avg_price_45),2) AS price45,
+            ROUND(AVG(avg_price_20rf),2) AS price20rf,
+            ROUND(AVG(avg_price_40rf),2) AS price40rf
+        FROM warehouse_fact_voyage_monthly_report AS report
+	        JOIN warehouse_company AS c ON c.company_key = report.company_key
+	        JOIN warehouse_date AS d ON d.date_key = report.date_key
+        WHERE report.company_key = #{companyKey}
+        GROUP BY d.quarter
+    </select>
+
+
+    <select id="selectPortQuotationAnnuallyIncreasingRateByYear"
+            resultType="com.zju.model.PortQuotationAnnuallyAVGAndIncreasingRate">
+
+        SELECT
+            this.port_key AS portKey,
+            this.port_name AS portName,
+            ROUND(this.price20,2) AS price20,
+            ROUND(this.price40,2) AS price40,
+            ROUND(this.price40h,2) AS price40h,
+            ROUND(this.price20/last.price20 - 1,2) AS rate20,
+            ROUND(this.price40/last.price40 - 1,2) AS rate40,
+            ROUND(this.price40h/last.price40h - 1,2) AS rate40h
+        FROM
+            (
+                SELECT
+                    port.port_key AS port_key,
+                    port.name_cn AS port_name,
+                    AVG(report.avg_price_20gp) AS price20,
+                    AVG(report.avg_price_40gp) AS price40,
+                    AVG(report.avg_price_40hq) AS price40h
+                FROM warehouse_fact_voyage_monthly_report AS report
+                    JOIN warehouse_date AS date ON report.date_key = date.date_key
+                    JOIN warehouse_port AS port ON report.destination_port_key = port.port_key
+                WHERE date.year = #{year}
+                GROUP BY date.year, port.port_key
+            ) AS this
+            JOIN
+            (
+                SELECT
+                    report.destination_port_key AS port_key,
+                    AVG(report.avg_price_20gp) AS price20,
+                    AVG(report.avg_price_40gp) AS price40,
+                    AVG(report.avg_price_40hq) AS price40h
+                FROM warehouse_fact_voyage_monthly_report AS report
+                    JOIN warehouse_date AS date ON report.date_key = date.date_key
+                WHERE date.year = #{year} - 1
+                GROUP BY date.year, report.destination_port_key
+            ) AS last
+            ON this.port_key = last.port_key
+        GROUP BY this.port_key
+    </select>
+</mapper>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="Shortcut Icon" href="asset/logo.png"/>
+    <title>海运报价可视化</title>
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .dashboard-tile {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div id="loadbg"></div>
+<div class="loader"></div>
+<section id="container">
+    <header id="header">
+        <!--logo start-->
+        <div class="brand">
+            <a href="index.html" class="logo">
+
+                <span>海运报价</span>可视化</a>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" style="color: white;background-color: #1abc9c;">
+                <i class="fa fa-home" style="margin-right: 10px;"></i>仪表盘
+            </button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(0)">
+                <i class="fa fa-home" style="margin-right: 10px;"></i>最新报价
+            </button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(1)"><i class="fa fa-thumb-tack"
+                                                                                               style="margin-right: 10px;"></i>港口运力比
+            </button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(2)"><i class="fa fa-tachometer"
+                                                                                               style="margin-right: 10px;"></i>船公司对比
+            </button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(3)"><i class="fa fa-globe"
+                                                                                               style="margin-right: 10px;"></i>船公司详情
+            </button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans"><i class="fa fa-users"
+                                                                       style="margin-right: 10px;"></i>用户行为图
+            </button>
+        </div>
+        <div class="help">
+            <i class="glyphicon glyphicon-signal btn btn-primary btn-trans " data-toggle="tooltip" data-placement="left"
+               title="数据统计信息总览" onclick="changepage(5)"></i>
+        </div>
+    </header>
+
+    <!--main content start-->
+    <section class="main-content-wrapper">
+        <section id="main-content">
+            <!--tiles start-->
+            <div class="row">
+                <div class="col-md-4 col-sm-10">
+                    <div class="col-md-6 col-sm-9">
+                        <div class="dashboard-tile detail tile-red hvr-grow" onclick="initUpPrice()">
+                            <div class="content">
+                                <h1 class="text-left timer" id="upPrice"></h1>
+                                <p id="upPriceRate">
+                                    报价频次
+                                </p>
+                            </div>
+                            <div class="icon"><i class="fa fa-users"></i>
+                            </div>
+                        </div>
+                        <div class="dashboard-tile detail tile-blue hvr-grow" onclick="initUpPort()">
+                            <div class="content">
+                                <h1 class="text-left timer" id="upPort"></h1>
+                                <p id="upPortRate">港口数量</p>
+                            </div>
+                            <div class="icon"><i class="fa fa fa-envelope"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-9">
+                        <div class="dashboard-tile detail tile-turquoise hvr-grow" onclick="initUpLine()">
+                            <div class="content">
+                                <h1 class="text-left timer" id="upLine"></h1>
+                                <p id="upLineRate">航线数量</p>
+                            </div>
+                            <div class="icon"><i class="fa fa-comments"></i>
+                            </div>
+                        </div>
+                        <div class="dashboard-tile detail tile-purple hvr-grow" onclick="initUpCompany()">
+                            <div class="content">
+                                <h1 class="text-left timer" id="upCompany"></h1>
+                                <p id="upCompanyRate">船公司数量</p>
+                            </div>
+                            <div class="icon"><i class="fa fa-bar-chart-o"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-18">
+                        <div class="panel panel-default">
+
+                            <div class="panel-body">
+                                <div id="upChart" style="height: 300px;width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-8" style="padding-left: 0px;">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <script type="application/javascript">
+                                    document.write(new Date().getFullYear() + "");
+                                </script>
+                                年各港口价格增幅
+                            </h3>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+                                <i class="fa fa-times"></i>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div id="selaMap" style="height: 520px;width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--tiles end-->
+            <!--dashboard charts and map start-->
+            <!--<div class="row">-->
+            <!--<div class="col-md-12">-->
+            <!--<div class="panel panel-default">-->
+            <!--<div class="panel-heading">-->
+            <!--<h3 class="panel-title">统计报表</h3>-->
+            <!--<div class="actions pull-right">-->
+            <!--<i class="fa fa-chevron-down"></i>-->
+            <!--<i class="fa fa-times"></i>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="panel-body">-->
+            <!--<div id="sales-chart" style="height: 250px;"></div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--</div>-->
+            <!--dashboard charts and map end-->
+
+        </section>
+    </section>
+    <section class="main-content-wrapper">
+        <div style="text-align: center;">
+            <span>Copyright©2016 宁波数联软件有限公司  0574-27880887 |</span> <span
+                style="padding-left: 20px;">浙ICP备16000800号-1</span>
+        </div>
+    </section>
+</section>
+
+<script src="assets/plugins/jquery-1.10.2.min.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<!--<script src="js/esl.js"></script>-->
+<script src="assets/plugins/bootstrap-select.min.js"></script>
+<script src="assets/plugins/bootstrap-datetimepicker.min.js"></script>
+<script src="assets/plugins/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="assets/plugins/countUp.js"></script>
+<script src="js/echarts.js"></script>
+<script src="js/echarts-x/echarts-x.js"></script>
+<script src="assets/plugins/world.js"></script>
+<script src="assets/script/app.js"></script>
+<script src="assets/script/service/dashboardService.js"></script>
+<script src="assets/script/dashboard.js"></script>
+<script src="js/theme/vintage.js"></script>
+<script type="text/javascript">
+    initCharts();
+
+</script>
+<script>
+    $(function () {
+        $("[data-toggle='tooltip']").tooltip();
+    });
+</script>
+</body>
+
+</html>

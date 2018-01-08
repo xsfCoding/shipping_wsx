@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zju.dao.DatabaseDailyReportMapper">
+
+    <select id="selectByDateRange" resultType="com.zju.model.DatabaseUpdateReport">
+        SELECT
+            SUM(new_quotation_count) AS newQuotationCount,
+            SUM(new_route_count) AS newRouteCount,
+            SUM(new_port_count) AS newPortCount,
+            SUM(new_company_count) AS newCompanyCount
+        FROM warehouse_fact_database_daily_report AS report
+            JOIN warehouse_date AS date ON date.date_key = report.date_key
+        WHERE date.date BETWEEN #{dateFrom} AND #{dateTo}
+    </select>
+
+</mapper>

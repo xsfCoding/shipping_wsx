@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zju.dao.QuotationMapper">
+
+    <resultMap id="datePriceCompanyResultMap" type="com.zju.model.CompanyQuoteOnPort">
+        <result property="closingTimeEnd" column="date"/>
+        <result property="price" column="price"/>
+        <result property="shippingCompany" column="companyName"/>
+    </resultMap>
+
+    <select id="selectCompanyQuoteOnPortByVoyageAndDateRange" resultMap="datePriceCompanyResultMap">
+        SELECT
+        d.date AS date,
+        c.name_cn AS companyName,
+        <choose>
+            <when test="priceType == 'price20'">
+                quote.price_20gp AS price
+            </when>
+            <when test="priceType == 'price40'">
+                quote.price_40gp AS price
+            </when>
+            <otherwise>
+                quote.price_40hq AS price
+            </otherwise>
+        </choose>
+        FROM warehouse_fact_quotation AS quote
+        JOIN warehouse_date AS d ON quote.creation_date_key = d.date_key
+        JOIN warehouse_company AS c ON quote.company_key = c.company_key
+        WHERE d.date BETWEEN #{dateFrom} AND #{dateTo}
+        AND quote.starting_port_key = #{startingPortKey}
+        AND quote.destination_port_key = #{destinationPortKey}
+    </select>
+
+
+    <select id="selectLatestDate" resultType="com.zju.model.DateDimension">
+        SELECT
+            d.date_key    AS dateKey,
+            d.date        AS date,
+            d.year        AS year,
+            d.month       AS month,
+            d.day         AS day,
+            d.quarter     AS quarter,
+            d.day_of_week AS dayOfWeek
+        FROM warehouse_fact_quotation AS q
+	         JOIN warehouse_date AS d ON q.creation_date_key = d.date_key
+	    WHERE d.date &lt; CURDATE()
+        ORDER BY d.date_key DESC
+        LIMIT 1
+    </select>
+
+    <select id="selectPortQuotationByStartingPortRouteAndDate" resultMap="latestByStartingPortRouteAndDateResultMap">
+        SELECT
+            port.port_key AS port_key,
+            port.name_cn AS port_name,
+            SUM(report.new_quotation_count) AS num,
+            ROUND(AVG(quote.price_20gp),2) AS price_20gp,
+            ROUND(AVG(quote.price_40gp),2) AS price_40gp,
+            ROUND(AVG(quote.price_40hq),2) AS price_40hq,
+            port.longitude AS longitude,
+            port.latitude AS latitude,
+            port.country_cn AS country
+        FROM warehouse_fact_quotation AS quote
+            JOIN warehouse_port AS port ON quote.destination_port_key = port.port_key
+            JOIN warehouse_fact_port_daily_report AS report ON quote.destination_port_key = report.port_key
+            JOIN warehouse_date AS date ON date.date_key = quote.creation_date_key
+        WHERE quote.creation_date_key = #{latestDateKey}
+            AND report.date_key = #{latestDateKey}
+            AND quote.starting_port_key = #{startingPortKey}
+            AND port.longitude IS NOT NULL
+            AND port.latitude IS NOT NULL
+        <if test="routeKey > 0">
+            AND quote.route_key = #{routeKey}
+        </if>
+        GROUP BY port.port_key
+        ORDER BY num DESC
+    </select>
+
+    <resultMap id="latestByStartingPortRouteAndDateResultMap" type="com.zju.model.PortQuotationAVGWithCount">
+        <id property="dischargingPortId" column="port_key"/>
+        <result property="dischargingPort" column="port_name"/>
+        <result property="num" column="num"/>
+        <result property="lat" column="latitude"/>
+        <result property="lng" column="longitude"/>
+        <result property="country" column="country"/>
+        <result property="price20" column="price_20gp"/>
+        <result property="price40" column="price_40gp"/>
+        <result property="price40h" column="price_40hq"/>
+    </resultMap>
+
+
+    <select id="selectCompanyQuotationByVoyageAndDate" resultMap="latestCompanyQuotationResultMap">
+        SELECT
+            companyName.company_key AS company_key,
+	        companyName.name_cn AS companyName,
+	        quote.schedule AS schedule,
+	        quote.price_20gp,
+	        quote.price_40gp,
+	        quote.price_40hq
+        FROM warehouse_fact_quotation AS quote
+	        JOIN warehouse_company AS companyName ON quote.company_key = companyName.company_key
+        WHERE quote.starting_port_key = #{startingPortKey}
+	        AND quote.destination_port_key = #{destinationPortKey}
+	        AND quote.creation_date_key = #{latestDateKey}
+    </select>
+
+    <resultMap id="latestCompanyQuotationResultMap" type="com.zju.model.CompanySchedule">
+        <id property="companyKey" column="company_key"/>
+        <result property="companyName" column="companyName"/>
+        <result property="schedule" column="schedule"/>
+        <result property="price20" column="price_20gp"/>
+        <result property="price40" column="price_40gp"/>
+        <result property="price40h" column="price_40hq"/>
+    </resultMap>
+
+    <select id="selectDestinationPortWithQuotationCountByCompany"
+            resultMap="destinationPortWithQuotationCountByCompanyAndStartingPort">
+
+        SELECT
+            company.company_key AS company_key,
+            company.name_cn AS company_name,
+            port.port_key AS port_key,
+	        port.name_cn AS port_name,
+	        port.longitude AS longitude,
+	        port.latitude AS latitude,
+	        COUNT(*) AS count
+        FROM warehouse_fact_quotation AS quote
+	        JOIN warehouse_company AS company ON quote.company_key = company.company_key
+	        JOIN warehouse_port AS port ON quote.destination_port_key = port.port_key
+        WHERE company.company_key = #{companyKey}
+            AND port.longitude IS NOT NULL
+            AND port.latitude IS NOT NULL
+        GROUP BY port.port_key
+        ORDER BY count DESC
+    </select>
+
+    <resultMap id="destinationPortWithQuotationCountByCompanyAndStartingPort"
+               type="com.zju.model.PortWithCompanyQuotationCount">
+
+        <id property="companyKey" column="company_key"/>
+        <result property="companyName" column="company_name"/>
+        <result property="portKey" column="port_key"/>
+        <result property="portName" column="port_name"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+        <result property="quotationCount" column="count"/>
+    </resultMap>
+
+
+    <select id="selectRouteWithQuotationCountByCompany"
+            resultMap="routeWithQuotationCountByCompanyAndStartingPort">
+
+        SELECT
+            company.company_key AS company_key,
+            company.name_cn AS company_name,
+            route.route_key AS route_key,
+	        route.name_cn as route_name,
+	        COUNT(*) AS count
+        FROM warehouse_fact_quotation AS quote
+	        JOIN warehouse_company AS company ON quote.company_key = company.company_key
+	        JOIN warehouse_route AS route ON quote.route_key = route.route_key
+        WHERE company.company_key = #{companyKey}
+        GROUP BY route.route_key
+        ORDER BY count DESC
+    </select>
+
+    <resultMap id="routeWithQuotationCountByCompanyAndStartingPort"
+               type="com.zju.model.RouteWithCompanyQuotationCount">
+        <id property="companyKey" column="company_key"/>
+        <result property="companyName" column="company_name"/>
+        <result property="routeKey" column="route_key"/>
+        <result property="routeName" column="route_name"/>
+        <result property="quotationCount" column="count"/>
+    </resultMap>
+
+
+    <select id="selectQuotationByCompany" resultType="com.zju.model.Quotation">
+        SELECT
+            quote.quotation_key AS quotationKey,
+            cutoffd.date AS cutoffDate,
+            setsaild.date AS setSailDate,
+            sport.name_cn AS startingPort,
+            dport.name_cn AS destinationPort,
+            tport.name_cn AS transitPort,
+            quote.duration AS duration,
+            quote.price_20gp AS price20,
+            quote.price_40gp AS price40,
+            quote.price_40hq AS price40h
+        FROM warehouse_fact_quotation AS quote
+            JOIN warehouse_company AS c ON quote.company_key = c.company_key
+	        LEFT JOIN warehouse_date AS cutoffd ON quote.cutoff_date_key = cutoffd.date_key
+	        LEFT JOIN warehouse_date AS setsaild ON quote.setsail_date_key = setsaild.date_key
+	        JOIN warehouse_port AS sport ON quote.starting_port_key = sport.port_key
+	        LEFT JOIN warehouse_port AS tport ON quote.transit_port_key = tport.port_key
+	        JOIN warehouse_port AS dport ON quote.destination_port_key = dport.port_key
+        WHERE c.company_key = #{companyKey}
+    </select>
+
+    <select id="selectRoutePortPairByYear" resultType="com.zju.model.RoutePortPair">
+        SELECT
+	        quote.route_key AS routeKey,
+	        port.port_key AS portKey,
+	        port.longitude AS longitude,
+	        port.latitude AS latitude,
+	        port.name_cn AS portName
+        FROM warehouse_fact_quotation AS quote
+            JOIN warehouse_date AS date ON quote.creation_date_key = date_key
+            JOIN warehouse_port AS port ON quote.destination_port_key = port.port_key
+        WHERE date.year = #{year}
+            AND port.longitude IS NOT NULL
+            AND port.latitude IS NOT NULL
+        GROUP BY quote.route_key, port.port_key
+    </select>
+
+
+    <select id="selectPortSummaryByYearRange" resultType="com.zju.pojo.Summary$PortSummaryByYear">
+        SELECT
+            quote.destination_port_key AS portKey,
+            date.year AS year,
+            COUNT(DISTINCT quote.company_key) AS companyCount,
+            COUNT(DISTINCT quote.route_key) AS routeCount,
+            COUNT(quote.quotation_key) AS quotationCount
+        FROM warehouse_fact_quotation AS quote
+            JOIN warehouse_date AS date ON quote.creation_date_key = date.date_key
+        WHERE date.year BETWEEN #{startYear} AND #{endYear}
+            AND date.date &lt; CURDATE()
+        GROUP BY quote.destination_port_key, date.year
+    </select>
+
+    <select id="selectRouteSummaryByYearRange" resultType="com.zju.pojo.Summary$RouteSummaryByYear">
+        SELECT
+            quote.route_key AS routeKey,
+            date.year AS year,
+            COUNT(DISTINCT quote.company_key) AS companyCount,
+            COUNT(DISTINCT quote.destination_port_key) AS portCount,
+            COUNT(quote.quotation_key) AS quotationCount
+        FROM warehouse_fact_quotation AS quote
+            JOIN warehouse_date AS date ON quote.creation_date_key = date.date_key
+        WHERE date.year BETWEEN #{startYear} AND #{endYear}
+            AND date.date &lt; CURDATE()
+        GROUP BY quote.route_key, date.year
+    </select>
+
+    <select id="selectCompanySummaryByYearRange" resultType="com.zju.pojo.Summary$CompanySummaryByYear">
+        SELECT
+            quote.company_key AS companyKey,
+            date.year AS year,
+            COUNT(DISTINCT quote.route_key) AS routeCount,
+            COUNT(DISTINCT quote.destination_port_key) AS portCount,
+            COUNT(quote.quotation_key) AS quotationCount
+        FROM warehouse_fact_quotation AS quote
+            JOIN warehouse_date AS date ON quote.creation_date_key = date.date_key
+        WHERE date.year BETWEEN #{startYear} AND #{endYear}
+            AND date.date &lt; CURDATE()
+        GROUP BY quote.company_key, date.year
+    </select>
+
+    <select id="selectDatabaseSummary" resultType="com.zju.pojo.Summary$DatabaseSummary">
+        SELECT
+            MIN(date.date) AS earliestDate,
+            MAX(date.date) AS latestDate,
+            COUNT(DISTINCT quote.destination_port_key) AS portCount,
+            COUNT(DISTINCT quote.company_key) AS companyCount,
+            COUNT(DISTINCT quote.route_key) AS routeCount,
+            COUNT(quote.quotation_key) AS quotationCount
+        FROM warehouse_fact_quotation AS quote
+            JOIN warehouse_date AS date ON quote.creation_date_key = date.date_key
+        WHERE date.date &lt;= CURDATE()
+    </select>
+
+</mapper>

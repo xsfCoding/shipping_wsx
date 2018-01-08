@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zju.dao.RouteMapper">
+    <select id="selectAllNames" resultType="com.zju.model.Route">
+        SELECT
+            route_key AS routeKey,
+            name
+        FROM warehouse_route
+        ORDER BY name_en ASC
+    </select>
+</mapper>

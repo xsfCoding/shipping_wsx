@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zju.dao.PortDailyReportMapper">
+
+    <select id="selectPortMonthlyCountByYear" resultType="com.zju.model.MonthlyCount">
+        SELECT
+	        date.month AS month,
+	        COUNT(DISTINCT report.port_key) AS count
+        FROM warehouse_fact_port_daily_report AS report
+	        JOIN warehouse_date AS date ON report.date_key = date.date_key
+        WHERE report.new_quotation_count > 0
+              AND date.year = #{year}
+              AND date.date &lt;= CURDATE()
+        GROUP BY date.year, date.month
+    </select>
+
+</mapper>

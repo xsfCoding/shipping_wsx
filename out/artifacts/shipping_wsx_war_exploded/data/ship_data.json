@@ -1,0 +1,1484 @@
+{
+  "radar": {
+    "indicator": [
+      {
+        "text": "报价活跃度",
+        "max": 11702.0
+      },
+      {
+        "text": "航线覆盖度",
+        "max": 19.0
+      },
+      {
+        "text": "港口覆盖度",
+        "max": 127.0
+      }
+    ],
+    "data": [
+      {
+        "shippingCompanyId": 156,
+        "shippingCompany": "中海",
+        "value": [
+          11046.0,
+          19.0,
+          118.0
+        ]
+      },
+      {
+        "shippingCompanyId": 163,
+        "shippingCompany": "南美智利",
+        "value": [
+          656.0,
+          9.0,
+          18.0
+        ]
+      }
+    ]
+  },
+  "concreteCompany": [
+    {
+      "shippingCompanyId": 156,
+      "shippingCompany": "中海",
+      "quoto": [
+        {
+          "type": "1",
+          "num": 2235,
+          "price20": 1365.6512981199642,
+          "price20rf": 0.0,
+          "price40": 2555.5617726051923,
+          "price40h": 2630.9377797672337,
+          "price40rf": 0.0,
+          "price45": 1125.0,
+          "shippingCompany": "中海"
+        },
+        {
+          "type": "2",
+          "num": 3348,
+          "price20": 1088.38782924614,
+          "price20rf": 0.0,
+          "price40": 1986.7256503327283,
+          "price40h": 2066.7129461584996,
+          "price40rf": 0.0,
+          "price45": 0.0,
+          "shippingCompany": "中海"
+        },
+        {
+          "type": "3",
+          "num": 3207,
+          "price20": 1243.5037998733376,
+          "price20rf": 0.0,
+          "price40": 2316.176377454085,
+          "price40h": 2391.429702343255,
+          "price40rf": 0.0,
+          "price45": 1886.0,
+          "shippingCompany": "中海"
+        },
+        {
+          "type": "4",
+          "num": 2256,
+          "price20": 1222.6640070921985,
+          "price20rf": 0.0,
+          "price40": 2299.5301418439717,
+          "price40h": 2372.845744680851,
+          "price40rf": 0.0,
+          "price45": 1330.5882352941176,
+          "shippingCompany": "中海"
+        }
+      ],
+      "lineCover": [
+        {
+          "route": 137,
+          "routeName": "东南亚",
+          "num": 248,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 138,
+          "routeName": "中东",
+          "num": 295,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 139,
+          "routeName": "印巴",
+          "num": 66,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 140,
+          "routeName": "红海",
+          "num": 268,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 141,
+          "routeName": "欧洲",
+          "num": 2584,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 142,
+          "routeName": "黑海",
+          "num": 594,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 143,
+          "routeName": "地西",
+          "num": 1702,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 144,
+          "routeName": "地东",
+          "num": 3954,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 145,
+          "routeName": "俄远东",
+          "num": 21,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 146,
+          "routeName": "日韩",
+          "num": 12,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 147,
+          "routeName": "北美",
+          "num": 16,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 148,
+          "routeName": "中美洲",
+          "num": 12,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 149,
+          "routeName": "南美",
+          "num": 6,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 150,
+          "routeName": "澳洲",
+          "num": 64,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 151,
+          "routeName": "东非",
+          "num": 21,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 152,
+          "routeName": "西非",
+          "num": 250,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 153,
+          "routeName": "南非",
+          "num": 22,
+          "shippingCompany": "中海"
+        },
+        {
+          "route": 154,
+          "routeName": "北非",
+          "num": 901,
+          "shippingCompany": "中海"
+        }
+      ],
+      "portCover": [
+        {
+          "dischargingPortId": 2,
+          "dischargingPort": "金边",
+          "num": 14,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 3,
+          "dischargingPort": "西哈努克",
+          "num": 2,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 4,
+          "dischargingPort": "勿拉湾",
+          "num": 16,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 261,
+          "dischargingPort": "阿尔及尔",
+          "num": 177,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 5,
+          "dischargingPort": "雅加达",
+          "num": 11,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 6,
+          "dischargingPort": "三宝垄",
+          "num": 17,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 7,
+          "dischargingPort": "泗水",
+          "num": 17,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 266,
+          "dischargingPort": "班加西",
+          "num": 58,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 267,
+          "dischargingPort": "胡姆斯",
+          "num": 86,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 268,
+          "dischargingPort": "米苏腊塔",
+          "num": 62,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 269,
+          "dischargingPort": "的黎波里",
+          "num": 86,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 270,
+          "dischargingPort": "卡萨步兰卡",
+          "num": 200,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 15,
+          "dischargingPort": "巴西古档",
+          "num": 15,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 16,
+          "dischargingPort": "槟城",
+          "num": 17,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 17,
+          "dischargingPort": "巴生港(西）",
+          "num": 17,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 274,
+          "dischargingPort": "斯法克斯",
+          "num": 137,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 25,
+          "dischargingPort": "仰光",
+          "num": 16,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 31,
+          "dischargingPort": "马尼拉",
+          "num": 18,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 32,
+          "dischargingPort": "新加坡",
+          "num": 12,
+          "shippingCompany": "中海",
+          "longitude": 103.761862,
+          "latitude": 1.283149
+        },
+        {
+          "dischargingPortId": 33,
+          "dischargingPort": "曼谷LAT",
+          "num": 14,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 34,
+          "dischargingPort": "曼谷PAT",
+          "num": 16,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 35,
+          "dischargingPort": "林查班",
+          "num": 16,
+          "shippingCompany": "中海",
+          "longitude": 100.884444,
+          "latitude": 13.069115
+        },
+        {
+          "dischargingPortId": 36,
+          "dischargingPort": "拉塔班",
+          "num": 2,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 38,
+          "dischargingPort": "海防",
+          "num": 2,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 40,
+          "dischargingPort": "胡志明",
+          "num": 12,
+          "shippingCompany": "中海",
+          "longitude": 106.886571,
+          "latitude": 10.405199
+        },
+        {
+          "dischargingPortId": 50,
+          "dischargingPort": "香港",
+          "num": 1,
+          "shippingCompany": "中海",
+          "longitude": 114.129752,
+          "latitude": 22.280284
+        },
+        {
+          "dischargingPortId": 59,
+          "dischargingPort": "阿巴斯",
+          "num": 51,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 62,
+          "dischargingPort": "乌姆卡萨",
+          "num": 9,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 66,
+          "dischargingPort": "多哈",
+          "num": 3,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 67,
+          "dischargingPort": "达曼",
+          "num": 76,
+          "shippingCompany": "中海",
+          "longitude": 50.121524,
+          "latitude": 26.470063
+        },
+        {
+          "dischargingPortId": 68,
+          "dischargingPort": "利雅德",
+          "num": 75,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 74,
+          "dischargingPort": "苏哈",
+          "num": 10,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 77,
+          "dischargingPort": "迪拜",
+          "num": 81,
+          "shippingCompany": "中海",
+          "longitude": 55.272143,
+          "latitude": 25.245509
+        },
+        {
+          "dischargingPortId": 336,
+          "dischargingPort": "塞得港 东港",
+          "num": 175,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 337,
+          "dischargingPort": "敦刻尔克",
+          "num": 17,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 339,
+          "dischargingPort": "库姆港",
+          "num": 18,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 345,
+          "dischargingPort": "胡志明 NEW PORT",
+          "num": 1,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 346,
+          "dischargingPort": "胡志明 CATLAI",
+          "num": 5,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 352,
+          "dischargingPort": "阿代比耶",
+          "num": 35,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 101,
+          "dischargingPort": "蒙德拉",
+          "num": 28,
+          "shippingCompany": "中海",
+          "longitude": 177.012404,
+          "latitude": -37.942549
+        },
+        {
+          "dischargingPortId": 113,
+          "dischargingPort": "卡拉奇",
+          "num": 28,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 116,
+          "dischargingPort": "亚喀巴",
+          "num": 45,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 117,
+          "dischargingPort": "吉达",
+          "num": 67,
+          "shippingCompany": "中海",
+          "longitude": 39.125937,
+          "latitude": 21.306609
+        },
+        {
+          "dischargingPortId": 120,
+          "dischargingPort": "吉布提",
+          "num": 35,
+          "shippingCompany": "中海",
+          "longitude": 42.675543,
+          "latitude": 11.659231
+        },
+        {
+          "dischargingPortId": 121,
+          "dischargingPort": "索纳",
+          "num": 45,
+          "shippingCompany": "中海",
+          "longitude": 91.066158,
+          "latitude": 22.224308
+        },
+        {
+          "dischargingPortId": 122,
+          "dischargingPort": "亚历山大",
+          "num": 243,
+          "shippingCompany": "中海",
+          "longitude": -134.642653,
+          "latitude": 56.24715
+        },
+        {
+          "dischargingPortId": 124,
+          "dischargingPort": "苏丹港",
+          "num": 34,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 382,
+          "dischargingPort": "奥斯陆",
+          "num": 137,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 128,
+          "dischargingPort": "达克黑拉",
+          "num": 22,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 132,
+          "dischargingPort": "安特卫普",
+          "num": 210,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 133,
+          "dischargingPort": "泽布勒赫",
+          "num": 198,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 134,
+          "dischargingPort": "勒阿弗尔",
+          "num": 159,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 390,
+          "dischargingPort": "雷达斯",
+          "num": 69,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 135,
+          "dischargingPort": "汉堡",
+          "num": 368,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 136,
+          "dischargingPort": "不莱梅哈芬",
+          "num": 35,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 137,
+          "dischargingPort": "鹿特丹",
+          "num": 369,
+          "shippingCompany": "中海",
+          "longitude": 4.417614,
+          "latitude": 51.898664
+        },
+        {
+          "dischargingPortId": 139,
+          "dischargingPort": "费利克斯托",
+          "num": 174,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 140,
+          "dischargingPort": "南安普敦",
+          "num": 117,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 141,
+          "dischargingPort": "泰晤士",
+          "num": 6,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 397,
+          "dischargingPort": "托布鲁克",
+          "num": 23,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 398,
+          "dischargingPort": "伊斯肯德伦",
+          "num": 22,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 400,
+          "dischargingPort": "摩尔多瓦",
+          "num": 2,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 146,
+          "dischargingPort": "圣彼得堡",
+          "num": 100,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 147,
+          "dischargingPort": "科特卡",
+          "num": 100,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 151,
+          "dischargingPort": "哥德堡",
+          "num": 136,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 155,
+          "dischargingPort": "什切青",
+          "num": 83,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 156,
+          "dischargingPort": "格丁尼亚",
+          "num": 137,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 158,
+          "dischargingPort": "卡拉佩达",
+          "num": 84,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 167,
+          "dischargingPort": "奥胡斯",
+          "num": 20,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 169,
+          "dischargingPort": "都柏林",
+          "num": 84,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 170,
+          "dischargingPort": "科克",
+          "num": 84,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 173,
+          "dischargingPort": "瓦尔纳",
+          "num": 111,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 174,
+          "dischargingPort": "康斯坦萨",
+          "num": 112,
+          "shippingCompany": "中海",
+          "longitude": 28.653362,
+          "latitude": 44.175283
+        },
+        {
+          "dischargingPortId": 175,
+          "dischargingPort": "诺沃罗西斯克",
+          "num": 110,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 176,
+          "dischargingPort": "伊利乔夫斯克",
+          "num": 105,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 177,
+          "dischargingPort": "奥德塞",
+          "num": 177,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 178,
+          "dischargingPort": "福斯",
+          "num": 269,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 179,
+          "dischargingPort": "热那亚",
+          "num": 351,
+          "shippingCompany": "中海",
+          "longitude": 8.855804,
+          "latitude": 44.412101
+        },
+        {
+          "dischargingPortId": 180,
+          "dischargingPort": "那不勒斯",
+          "num": 225,
+          "shippingCompany": "中海",
+          "longitude": 14.257767,
+          "latitude": 40.843977
+        },
+        {
+          "dischargingPortId": 181,
+          "dischargingPort": "拉斯佩齐亚",
+          "num": 249,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 184,
+          "dischargingPort": "巴塞罗娜",
+          "num": 347,
+          "shippingCompany": "中海",
+          "longitude": 2.189621,
+          "latitude": 41.375965
+        },
+        {
+          "dischargingPortId": 185,
+          "dischargingPort": "瓦伦西亚",
+          "num": 269,
+          "shippingCompany": "中海",
+          "longitude": -0.311489,
+          "latitude": 39.328727
+        },
+        {
+          "dischargingPortId": 186,
+          "dischargingPort": "阿尔赫西拉斯",
+          "num": 22,
+          "shippingCompany": "中海",
+          "longitude": -134.642653,
+          "latitude": 56.24715
+        },
+        {
+          "dischargingPortId": 189,
+          "dischargingPort": "利马索尔",
+          "num": 249,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 190,
+          "dischargingPort": "波季",
+          "num": 79,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 191,
+          "dischargingPort": "贝鲁特",
+          "num": 175,
+          "shippingCompany": "中海",
+          "longitude": 35.508369,
+          "latitude": 33.90535
+        },
+        {
+          "dischargingPortId": 192,
+          "dischargingPort": "拉塔基亚",
+          "num": 200,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 194,
+          "dischargingPort": "盖姆利克",
+          "num": 109,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 195,
+          "dischargingPort": "海达尔帕夏",
+          "num": 112,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 196,
+          "dischargingPort": "伊斯坦布尔",
+          "num": 102,
+          "shippingCompany": "中海",
+          "longitude": 29.025873,
+          "latitude": 40.989435
+        },
+        {
+          "dischargingPortId": 197,
+          "dischargingPort": "伊兹密尔",
+          "num": 245,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 199,
+          "dischargingPort": "马达司",
+          "num": 46,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 200,
+          "dischargingPort": "梅尔辛",
+          "num": 166,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 201,
+          "dischargingPort": "比雷埃夫斯",
+          "num": 247,
+          "shippingCompany": "中海",
+          "longitude": 23.5926,
+          "latitude": 37.955056
+        },
+        {
+          "dischargingPortId": 202,
+          "dischargingPort": "萨洛尼卡",
+          "num": 245,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 203,
+          "dischargingPort": "达米埃塔",
+          "num": 184,
+          "shippingCompany": "中海",
+          "longitude": 31.769879,
+          "latitude": 31.477351
+        },
+        {
+          "dischargingPortId": 204,
+          "dischargingPort": "塞得港 西港",
+          "num": 228,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 207,
+          "dischargingPort": "里耶卡",
+          "num": 38,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 208,
+          "dischargingPort": "科佩尔",
+          "num": 200,
+          "shippingCompany": "中海",
+          "longitude": 13.734424,
+          "latitude": 45.553678
+        },
+        {
+          "dischargingPortId": 209,
+          "dischargingPort": "塔兰托",
+          "num": 20,
+          "shippingCompany": "中海",
+          "longitude": 17.230154,
+          "latitude": 40.475179
+        },
+        {
+          "dischargingPortId": 212,
+          "dischargingPort": "里窝那",
+          "num": 224,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 216,
+          "dischargingPort": "的里雅斯特",
+          "num": 118,
+          "shippingCompany": "中海",
+          "longitude": 13.75894,
+          "latitude": 45.630216
+        },
+        {
+          "dischargingPortId": 217,
+          "dischargingPort": "威尼斯",
+          "num": 219,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 219,
+          "dischargingPort": "马尔他港",
+          "num": 73,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 220,
+          "dischargingPort": "阿什杜德",
+          "num": 160,
+          "shippingCompany": "中海",
+          "longitude": 34.64343,
+          "latitude": 31.817259
+        },
+        {
+          "dischargingPortId": 221,
+          "dischargingPort": "海法",
+          "num": 137,
+          "shippingCompany": "中海",
+          "longitude": 34.962702,
+          "latitude": 32.826885
+        },
+        {
+          "dischargingPortId": 222,
+          "dischargingPort": "阿德莱德",
+          "num": 3,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 223,
+          "dischargingPort": "布里斯班",
+          "num": 5,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 225,
+          "dischargingPort": "墨尔本",
+          "num": 2,
+          "shippingCompany": "中海",
+          "longitude": 144.764021,
+          "latitude": -37.90719
+        },
+        {
+          "dischargingPortId": 226,
+          "dischargingPort": "悉尼",
+          "num": 2,
+          "shippingCompany": "中海",
+          "longitude": 151.276566,
+          "latitude": -33.859542
+        },
+        {
+          "dischargingPortId": 229,
+          "dischargingPort": "德班",
+          "num": 9,
+          "shippingCompany": "中海",
+          "longitude": 31.042825,
+          "latitude": -29.864737
+        },
+        {
+          "dischargingPortId": 238,
+          "dischargingPort": "科托努",
+          "num": 33,
+          "shippingCompany": "中海",
+          "longitude": 2.415744,
+          "latitude": 6.346009
+        },
+        {
+          "dischargingPortId": 239,
+          "dischargingPort": "特马",
+          "num": 38,
+          "shippingCompany": "中海",
+          "longitude": 0.008817,
+          "latitude": 5.63277
+        },
+        {
+          "dischargingPortId": 243,
+          "dischargingPort": "阿帕帕",
+          "num": 38,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 245,
+          "dischargingPort": "TINCAN",
+          "num": 38,
+          "shippingCompany": "中海",
+          "longitude": 3.355916,
+          "latitude": 6.43216
+        },
+        {
+          "dischargingPortId": 246,
+          "dischargingPort": "奥内",
+          "num": 23,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 247,
+          "dischargingPort": "洛美",
+          "num": 45,
+          "shippingCompany": "中海",
+          "longitude": 1.275517,
+          "latitude": 6.139295
+        },
+        {
+          "dischargingPortId": 249,
+          "dischargingPort": "阿比让",
+          "num": 26,
+          "shippingCompany": "中海",
+          "longitude": -1.0,
+          "latitude": -1.0
+        }
+      ],
+      "thcPrice": [
+        {
+          "type": "1",
+          "num": 2235,
+          "thcprice20": 790.3162055335969,
+          "thcprice20rf": 948.0,
+          "thcprice40": 1185.4743083003953,
+          "thcprice40h": 1185.4743083003953,
+          "thcprice40rf": 1369.0,
+          "thcprice45": 1597.5494071146245,
+          "shippingCompany": "中海"
+        },
+        {
+          "type": "2",
+          "num": 3348,
+          "thcprice20": 800.0,
+          "thcprice20rf": 0.0,
+          "thcprice40": 1200.0,
+          "thcprice40h": 1200.0,
+          "thcprice40rf": 0.0,
+          "thcprice45": 1645.0,
+          "shippingCompany": "中海"
+        },
+        {
+          "type": "3",
+          "num": 3207,
+          "thcprice20": 798.6686838124054,
+          "thcprice20rf": 948.0,
+          "thcprice40": 1189.748865355522,
+          "thcprice40h": 1198.0030257186081,
+          "thcprice40rf": 1369.0,
+          "thcprice45": 1638.4765506807867,
+          "shippingCompany": "中海"
+        },
+        {
+          "type": "4",
+          "num": 2256,
+          "thcprice20": 790.5513784461153,
+          "thcprice20rf": 948.0,
+          "thcprice40": 1185.827067669173,
+          "thcprice40h": 1185.827067669173,
+          "thcprice40rf": 1369.0,
+          "thcprice45": 1598.701754385965,
+          "shippingCompany": "中海"
+        }
+      ]
+    },
+    {
+      "shippingCompanyId": 163,
+      "shippingCompany": "南美智利",
+      "quoto": [
+        {
+          "type": "1",
+          "num": 98,
+          "price20": 677.5510204081633,
+          "price20rf": 0.0,
+          "price40": 1152.0408163265306,
+          "price40h": 1152.0408163265306,
+          "price40rf": 0.0,
+          "price45": 0.0,
+          "shippingCompany": "南美智利"
+        },
+        {
+          "type": "2",
+          "num": 258,
+          "price20": 1050.7751937984497,
+          "price20rf": 0.0,
+          "price40": 1933.3333333333333,
+          "price40h": 1933.3333333333333,
+          "price40rf": 0.0,
+          "price45": 0.0,
+          "shippingCompany": "南美智利"
+        },
+        {
+          "type": "3",
+          "num": 174,
+          "price20": 977.4425287356322,
+          "price20rf": 0.0,
+          "price40": 1713.9367816091954,
+          "price40h": 1714.0804597701149,
+          "price40rf": 0.0,
+          "price45": 0.0,
+          "shippingCompany": "南美智利"
+        },
+        {
+          "type": "4",
+          "num": 126,
+          "price20": 866.2698412698413,
+          "price20rf": 0.0,
+          "price40": 1518.6507936507937,
+          "price40h": 1518.6507936507937,
+          "price40rf": 0.0,
+          "price45": 0.0,
+          "shippingCompany": "南美智利"
+        }
+      ],
+      "lineCover": [
+        {
+          "route": 144,
+          "routeName": "地东",
+          "num": 9,
+          "shippingCompany": "南美智利"
+        },
+        {
+          "route": 147,
+          "routeName": "北美",
+          "num": 2,
+          "shippingCompany": "南美智利"
+        },
+        {
+          "route": 137,
+          "routeName": "东南亚",
+          "num": 3,
+          "shippingCompany": "南美智利"
+        },
+        {
+          "route": 138,
+          "routeName": "中东",
+          "num": 619,
+          "shippingCompany": "南美智利"
+        },
+        {
+          "route": 139,
+          "routeName": "印巴",
+          "num": 2,
+          "shippingCompany": "南美智利"
+        },
+        {
+          "route": 140,
+          "routeName": "红海",
+          "num": 1,
+          "shippingCompany": "南美智利"
+        },
+        {
+          "route": 141,
+          "routeName": "欧洲",
+          "num": 6,
+          "shippingCompany": "南美智利"
+        },
+        {
+          "route": 142,
+          "routeName": "黑海",
+          "num": 9,
+          "shippingCompany": "南美智利"
+        }
+      ],
+      "portCover": [
+        {
+          "dischargingPortId": 32,
+          "dischargingPort": "新加坡",
+          "num": 1,
+          "shippingCompany": "南美智利",
+          "longitude": 103.761862,
+          "latitude": 1.283149
+        },
+        {
+          "dischargingPortId": 65,
+          "dischargingPort": "舒威客",
+          "num": 59,
+          "shippingCompany": "南美智利",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 66,
+          "dischargingPort": "多哈",
+          "num": 57,
+          "shippingCompany": "南美智利",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 67,
+          "dischargingPort": "达曼",
+          "num": 60,
+          "shippingCompany": "南美智利",
+          "longitude": 50.121524,
+          "latitude": 26.470063
+        },
+        {
+          "dischargingPortId": 68,
+          "dischargingPort": "利雅德",
+          "num": 59,
+          "shippingCompany": "南美智利",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 72,
+          "dischargingPort": "马斯喀特",
+          "num": 44,
+          "shippingCompany": "南美智利",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 76,
+          "dischargingPort": "阿布扎比",
+          "num": 55,
+          "shippingCompany": "南美智利",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 77,
+          "dischargingPort": "迪拜",
+          "num": 62,
+          "shippingCompany": "南美智利",
+          "longitude": 55.272143,
+          "latitude": 25.245509
+        },
+        {
+          "dischargingPortId": 78,
+          "dischargingPort": "豪尔法坎",
+          "num": 2,
+          "shippingCompany": "南美智利",
+          "longitude": 56.365522,
+          "latitude": 25.354964
+        },
+        {
+          "dischargingPortId": 81,
+          "dischargingPort": "沙加",
+          "num": 52,
+          "shippingCompany": "南美智利",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 17,
+          "dischargingPort": "巴生港(西）",
+          "num": 3,
+          "shippingCompany": "南美智利",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 82,
+          "dischargingPort": "巴林",
+          "num": 61,
+          "shippingCompany": "南美智利",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 83,
+          "dischargingPort": "阿治曼",
+          "num": 53,
+          "shippingCompany": "南美智利",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 117,
+          "dischargingPort": "吉达",
+          "num": 1,
+          "shippingCompany": "南美智利",
+          "longitude": 39.125937,
+          "latitude": 21.306609
+        },
+        {
+          "dischargingPortId": 59,
+          "dischargingPort": "阿巴斯",
+          "num": 4,
+          "shippingCompany": "南美智利",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 60,
+          "dischargingPort": "霍拉姆沙赫",
+          "num": 12,
+          "shippingCompany": "南美智利",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 61,
+          "dischargingPort": "布什尔",
+          "num": 12,
+          "shippingCompany": "南美智利",
+          "longitude": -1.0,
+          "latitude": -1.0
+        },
+        {
+          "dischargingPortId": 62,
+          "dischargingPort": "乌姆卡萨",
+          "num": 59,
+          "shippingCompany": "南美智利",
+          "longitude": -1.0,
+          "latitude": -1.0
+        }
+      ],
+      "thcPrice": [
+        {
+          "type": "1",
+          "num": 98,
+          "thcprice20": 0.0,
+          "thcprice20rf": 0.0,
+          "thcprice40": 0.0,
+          "thcprice40h": 0.0,
+          "thcprice40rf": 0.0,
+          "thcprice45": 0.0,
+          "shippingCompany": "南美智利"
+        },
+        {
+          "type": "2",
+          "num": 258,
+          "thcprice20": 0.0,
+          "thcprice20rf": 0.0,
+          "thcprice40": 0.0,
+          "thcprice40h": 0.0,
+          "thcprice40rf": 0.0,
+          "thcprice45": 0.0,
+          "shippingCompany": "南美智利"
+        },
+        {
+          "type": "3",
+          "num": 174,
+          "thcprice20": 0.0,
+          "thcprice20rf": 0.0,
+          "thcprice40": 0.0,
+          "thcprice40h": 0.0,
+          "thcprice40rf": 0.0,
+          "thcprice45": 0.0,
+          "shippingCompany": "南美智利"
+        },
+        {
+          "type": "4",
+          "num": 126,
+          "thcprice20": 0.0,
+          "thcprice20rf": 0.0,
+          "thcprice40": 0.0,
+          "thcprice40h": 0.0,
+          "thcprice40rf": 0.0,
+          "thcprice45": 0.0,
+          "shippingCompany": "南美智利"
+        }
+      ]
+    }
+  ]
+}

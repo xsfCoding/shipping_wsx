@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="Shortcut Icon" href="asset/logo.png" />
+    <title>海运报价可视化</title>
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/plugins/bootstrap-select.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .table>thead>tr>th {
+            vertical-align: bottom;
+            border: 1px solid #ddd !important;
+            border-top: 0;
+        }
+        .table>tbody>tr>td{
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+<div id="loadbg"></div>
+<div class="loader"></div>
+<section id="container">
+    <header id="header">
+        <!--logo start-->
+        <div class="brand">
+            <a   class="logo">
+
+                <span>海运报价</span>可视化</a>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(4)"><i class="fa fa-thumb-tack"style="margin-right: 10px;"></i>仪表盘</button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(0)">
+                <i class="fa fa-home" style="margin-right: 10px;"></i>最新报价
+            </button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(1)"><i class="fa fa-thumb-tack"style="margin-right: 10px;"></i>港口运力比</button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(2)"><i class="fa fa-tachometer"style="margin-right: 10px;"></i>船公司对比</button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans" onclick="changepage(3)"><i class="fa fa-globe"style="margin-right: 10px;"></i>船公司详情</button>
+        </div>
+        <div class="toggle-navigation toggle-left">
+            <button type="button" class="btn btn-primary btn-trans"><i class="fa fa-users"style="margin-right: 10px;"></i>用户行为图</button>
+        </div>
+        <div class="help" >
+            <i class="glyphicon glyphicon-signal btn btn-primary btn-trans " data-toggle="tooltip" data-placement="left" title="数据统计信息总览" onclick="changepage(5)"></i>
+        </div>
+    </header>
+
+    <!--main content start-->
+    <section class="main-content-wrapper" >
+
+        <section id="main-content">
+
+            <!--tiles start-->
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">总览统计信息</h3>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+
+                            <div style="width: 100%;height: 70px;float: left;">
+                                <table id="totalCount" class="table table-hover tableAna"></table>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"></h3>
+                            <script>
+                                var d =new Date();
+                                year=d.getFullYear();
+                                month=d.getMonth()+1;
+                                date=d.getDate();
+                                document.write(year+"年"+month+"月"+date+"日数据更新");
+                            </script>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+
+                            <div style="width: 100%;height: 70px;float: left;">
+                                <table id="updateCount" class="table table-hover tableAna"></table>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">分类信息汇总</h3>
+                            <div class="actions pull-right">
+                                <i class="fa fa-chevron-down"></i>
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="tab-wrapper tab-bottom tab-primary">
+                                <div class="tab-content" style="height: 560px;">
+                                    <div class="tab-pane active" id="tab1">
+                                        <div style="width: 100%;height: 560px;">
+                                            <table id="portTotal" class="table table-hover tableAna"></table>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tab2">
+                                        <div style="width: 100%;height: 560px;">
+                                            <table id="lineTotal" class="table table-hover tableAna"></table>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tab3">
+                                        <div style="width: 100%;height: 560px;">
+                                            <table id="companyTotal" class="table table-hover tableAna"></table>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tab1" data-toggle="tab"
+                                                          onclick="tableTab(1)">港口</a></li>
+                                    <li><a href="#tab2" data-toggle="tab"
+                                           onclick="tableTab(2)">航线</a></li>
+                                    <li><a href="#tab3" data-toggle="tab"
+                                           onclick="tableTab(3)">船公司</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </section>
+    </section>
+    <section class="main-content-wrapper" style="margin-top: 40px;">
+        <div style="text-align: center;" >
+            <span>Copyright©2016 宁波数联软件有限公司  0574-27880887 |</span> <span style="padding-left: 20px;">浙ICP备16000800号-1</span>
+        </div>
+    </section>
+</section>
+
+<script src="assets/plugins/jquery-1.10.2.min.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/plugins/bootstrap-select.min.js"></script>
+<script src="assets/plugins/table/bootstrap-table.min.js"></script>
+<script src="js/esl.js"></script>
+<script src="js/echarts/echarts.js"></script>
+<script src="js/echarts-x/echarts-x.js"></script>
+<script src="js/theme/vintage.js"></script>
+<script src="assets/script/app.js"></script>
+<script src="assets/script/total.js"></script>
+<script src="assets/script/service/totalService.js"></script>
+<script>
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+    function test(){$(".actions > .fa-chevron-down").click(function(){$(this).parent().parent().next().slideToggle("fast"),$(this).toggleClass("fa-chevron-down fa-chevron-up")})}
+    test();
+    $(function() {
+        $('.tableAna').bootstrapTable({
+//				url: "data/table.json",//数据源
+            //search: true,//是否搜索
+            pagination: true,//是否分页
+            pageSize: 8,//单页记录数
+            //showColumns: true,//列选择按钮
+//            dataField: "rows",//服务端返回数据键值 就是说记录放的键值是rows，分页时使用总记录数的键值为total
+//            pageList: [8, 16, 24, 32],//分页步进值
+            'data-locale':"zh-US",
+            columns: [{
+                field: 'column1',
+                title: '列名1',
+                sortable: true
+            }, {
+                field: 'column2',
+                title: '列名2',
+                sortable: true
+            }],
+            data:[]
+        });
+        setTableData();
+        updateTableData();
+    });
+
+
+
+</script>
+
+</body>
+
+</html>
