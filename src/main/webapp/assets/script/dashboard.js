@@ -79,66 +79,222 @@ function initCharts() {
 /*
  * 相比去年新增报价对比 1.按照月份,统计去年和今年每个月的报价次数 2.如果今年目前时间是11月 则12月和11月的报价都设置成0
  */
+
+
 function initUpPrice() {
 	var myChartUpPrice = echarts.init(document.getElementById('upChart'));
 	var priceData = ProcessData.processUpPrice(boardData.upPrice.detail);
 
 	var option = {
-		title : {
-			text : '相比去年新增报价频次'
-		},
-		tooltip : {
-			trigger : 'axis',
-			formatter : "{b}</br>{a0}：{c0}次</br>{a1}：{c1}次"
-		},
-		legend : {
-			data : [ boardData.lastYear, boardData.thisYear ],
-			right : '5%'
-		},
-		toolbox : {
-			feature : {
-				saveAsImage : {}
-			}
-		},
-		grid : {
-			left : '3%',
-			right : '4%',
-			bottom : '3%',
-			containLabel : true
-		},
-		xAxis : [ {
-			type : 'category',
-			boundaryGap : false,
-			data : [ '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月',
-					'10月', '11月', '12月' ]
-		} ],
-		yAxis : [ {
-			type : 'value'
-		} ],
-		series : [ {
-			name : boardData.lastYear,
-			type : 'line',
-			stack : '总量1',
-			areaStyle : {
-				normal : {}
-			},
-			data : priceData.data2
-		}, {
-			name : boardData.thisYear,
-			type : 'line',
-			stack : '总量2',
-			label : {
-				normal : {
-					show : true,
-					position : 'top'
-				}
-			},
-			areaStyle : {
-				normal : {}
-			},
-			data : priceData.data1
-		} ]
-	};
+            backgroundColor: '#192469',
+            title : {
+                text : '相比去年新增报价频次',
+                textStyle: {
+                    fontWeight: 'normal',
+                    fontSize: 16,
+                    color: '#F1F1F3'
+                },
+                left: '6%'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
+                },
+                formatter : "{b}</br>{a0}：{c0}次</br>{a1}：{c1}次"
+            },
+
+            legend: {
+                icon: 'rect',
+                itemWidth: 14,
+                itemHeight: 5,
+                itemGap: 13,
+
+                right: '4%',
+                textStyle: {
+                    fontSize: 12,
+                    color: '#292f39'
+                },
+                data : [ boardData.lastYear, boardData.thisYear ],
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+
+                type : 'category',
+                boundaryGap : false,
+                data : [ '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月',
+                    '10月', '11月', '12月' ],
+                axisLine: {
+                    lineStyle: {
+                        color: '#0483eb'
+                    }
+                },
+
+
+            }],
+
+
+            yAxis: [{
+                type: 'value',
+
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#0483eb'
+                    }
+                },
+                axisLabel: {
+                    margin: 10,
+                    textStyle: {
+                        fontSize: 12
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#17367c'
+                    }
+                }
+            }],
+
+
+
+            series: [{
+                name : boardData.lastYear,
+                type: 'line',
+                smooth: false,
+                symbolSize:6,
+                symbol:'circle',
+                stack : '总量1',
+
+                lineStyle: {
+                    normal: {
+                        width: 2
+                    },
+
+                },
+
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(112, 161, 250, 0.3)'
+                        }, {
+                            offset: 0.8,
+                            color: 'rgba(112, 161, 250, 0)'
+                        }], false),
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                        shadowBlur: 10
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#70a1fa'
+                    }
+                },
+                data : priceData.data2
+            },
+                {
+                    name: boardData.lastYear,
+                    type: 'line',
+                    smooth: false,
+                    symbolSize: 6,
+                    symbol: 'circle',
+                    stack: '总量2',
+
+                    lineStyle: {
+                        normal: {
+                            width: 2
+                        },
+
+                    },
+
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgba(112, 161, 250, 0.3)'
+                            }, {
+                                offset: 0.8,
+                                color: 'rgba(112, 161, 250, 0)'
+                            }], false),
+                            shadowColor: 'rgba(0, 0, 0, 0.1)',
+                            shadowBlur: 10
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#70a1fa'
+                        }
+                    },
+                    data: priceData.data1
+                }]
+        };
+
+    //
+		// title : {
+		// 	text : '相比去年新增报价频次'
+		// },
+		// tooltip : {
+		// 	trigger : 'axis',
+		// 	formatter : "{b}</br>{a0}：{c0}次</br>{a1}：{c1}次"
+		// },
+		// legend : {
+		// 	data : [ boardData.lastYear, boardData.thisYear ],
+		// 	right : '5%'
+		// },
+		// toolbox : {
+		// 	feature : {
+		// 		saveAsImage : {}
+		// 	}
+		// },
+		// grid : {
+		// 	left : '3%',
+		// 	right : '4%',
+		// 	bottom : '3%',
+		// 	containLabel : true
+		// },
+		// xAxis : [ {
+		// 	type : 'category',
+		// 	boundaryGap : false,
+		// 	data : [ '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月',
+		// 			'10月', '11月', '12月' ]
+		// } ],
+		// yAxis : [ {
+		// 	type : 'value'
+		// } ],
+		// series : [ {
+		// 	name : boardData.lastYear,
+		// 	type : 'line',
+		// 	stack : '总量1',
+		// 	areaStyle : {
+		// 		normal : {}
+		// 	},
+		// 	data : priceData.data2
+		// }, {
+		// 	name : boardData.thisYear,
+		// 	type : 'line',
+		// 	stack : '总量2',
+		// 	label : {
+		// 		normal : {
+		// 			show : true,
+		// 			position : 'top'
+		// 		}
+		// 	},
+		// 	areaStyle : {
+		// 		normal : {}
+		// 	},
+		// 	data : priceData.data1
+		// } ]
+
 	myChartUpPrice.setOption(option);
 }
 

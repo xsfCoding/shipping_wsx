@@ -23,11 +23,6 @@ public class BasicInfoController {
     @RequestMapping("/getBasicInfo")
     public BasicInfo getBasicInfo() {
         return basicInfoService.getBasicInfo();
-
-
-
-
-
     }
 
 }

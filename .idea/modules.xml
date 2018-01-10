@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/Downloads/safri下载/AdminLTE-2.4.2/AdminLTE-2.4.2.iml" filepath="$USER_HOME$/Downloads/safri下载/AdminLTE-2.4.2/AdminLTE-2.4.2.iml" />
       <module fileurl="file://$PROJECT_DIR$/shipping_wsx.iml" filepath="$PROJECT_DIR$/shipping_wsx.iml" />
     </modules>
   </component>
