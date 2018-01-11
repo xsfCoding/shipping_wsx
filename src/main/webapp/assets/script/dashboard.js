@@ -9,7 +9,7 @@ function initCharts() {
 				success : function(data) {
 					LoadingMask.hideloaddiv();
 					boardData = data;
-					console.log(boardData);
+
 
 					// 左上与去年比较数值
 					var options = {

@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
 
 
-
     <link rel="stylesheet" href="assets/plugins/bootstrap-select.min.css">
     <link rel="stylesheet" href="assets/plugins/table/bootstrap-table.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
@@ -141,7 +140,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-5 col-sm-18" >
+                        <div class="col-md-5 col-sm-18">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
@@ -153,9 +152,9 @@
                                     </div>
                                 </div>
 
-                                    <div class="panel-body">
-                                        <div id="upChart" style="height: 520px;width: 100%"></div>
-                                    </div>
+                                <div class="panel-body">
+                                    <div id="upChart" style="height: 520px;width: 100%"></div>
+                                </div>
 
                             </div>
 
@@ -188,80 +187,83 @@
             <!--dashboard charts and map end-->
 
             <div class="row">
-                <div class="col-md-8">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">船公司港口概况</h3>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">港口航线分析</h3>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-chevron-down"></i>
 
-                            <div class="actions pull-right">
-                                <i class="fa fa-chevron-down"></i>
+                                </div>
+                            </div>
+                            <div class="panel-body" style="height: 700px;">
 
+                                <!--<div style="height: 105px; width: 100%;">-->
+                                <div class="tab-wrapper tab-bottom tab-primary">
+                                    <div class="tab-content" style="height: 600px;">
+                                        <div class="tab-pane active" id="tab1">
+                                            <div id="pieChart" style="height: 580px; width: 550px;margin:auto"></div>
+                                        </div>
+                                        <div class="tab-pane" id="tab2">
+                                            <div id="barChart" style="height: 500px; width: 600px; margin: auto;"></div>
+                                        </div>
+
+                                    </div>
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#tab1" data-toggle="tab"
+                                                              onclick="getChart(1)">港口</a></li>
+                                        <li><a href="#tab2" data-toggle="tab"
+                                               onclick="getChart(2)">航线</a></li>
+                                    </ul>
+                                </div>
+                                <!--</div>-->
                             </div>
                         </div>
-                        <div class="panel-body">
-                            <form role="form">
-                                <div class="form-group">
-                                    <div class="col-sm-5">
-                                        <label for="ship"></label>
-                                        <select id="ship" name="ship" class="selectpicker show-tick form-control"
-                                                data-live-search="true" data-live-search-style="begins">
-                                        </select>
-                                    </div>
-                                    <!-- <div class="col-sm-3">
-                                        <label for="priceType"></label>
-                                        <select id="priceType" name="priceType" class="selectpicker show-tick form-control"  data-live-search="false" onchange="getEndPort(this.options[this.selectedIndex].text)">
-                                        <option value="0">-选择规格-</option>
-                                        <option value="price20">20规格</option>
-                                        <option value="price40">40规格</option>
-                                        <option value="price40h">40H规格</option>
-                                        </select>
-                                    </div> -->
-                                    <div class="col-sm-4">
-                                        <button type="button" class="btn btn-primary btn-trans"
-                                                onclick="initChartsC();" style="margin-top: 4px;">查询</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <div id="mapChart" style="height: 580px; width: 100%; padding: 10px;"></div>
-                        </div>
+
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">港口航线分析</h3>
-                            <div class="actions pull-right">
-                                <i class="fa fa-chevron-down"></i>
+                    <div class="col-md-7">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">船公司港口概况</h3>
 
-                            </div>
-                        </div>
-                        <div class="panel-body">
-
-                            <!--<div style="height: 105px; width: 100%;">-->
-                            <div class="tab-wrapper tab-bottom tab-primary">
-                                <div class="tab-content" style="height: 520px;">
-                                    <div class="tab-pane active" id="tab1">
-                                        <div id="pieChart" style="height: 500px; width: 400px;"></div>
-                                    </div>
-                                    <div class="tab-pane" id="tab2">
-                                        <div id="barChart" style="height: 500px; width: 450px; margin: 0;"></div>
-                                    </div>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-chevron-down"></i>
 
                                 </div>
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#tab1" data-toggle="tab"
-                                                          onclick="getChart(1)">港口</a></li>
-                                    <li><a href="#tab2" data-toggle="tab"
-                                           onclick="getChart(2)">航线</a></li>
-                                </ul>
                             </div>
-                            <!--</div>-->
+                            <div class="panel-body" style="height: 700px;">
+                                <form role="form" style="border-bottom: 5px">
+                                    <div class="form-group">
+                                        <div class="col-sm-5" style="height: 39px;">
+                                            <select id="ship" name="ship" class="selectpicker show-tick form-control"
+                                                    data-live-search="true" data-live-search-style="begins">
+                                            </select>
+                                        </div>
+
+                                        <!-- <div class="col-sm-3">
+                                            <label for="priceType"></label>
+                                            <select id="priceType" name="priceType" class="selectpicker show-tick form-control"  data-live-search="false" onchange="getEndPort(this.options[this.selectedIndex].text)">
+                                            <option value="0">-选择规格-</option>
+                                            <option value="price20">20规格</option>
+                                            <option value="price40">40规格</option>
+                                            <option value="price40h">40H规格</option>
+                                            </select>
+                                        </div> -->
+                                        <div class="col-sm-4">
+                                            <button type="button" class="btn btn-primary btn-trans"
+                                                    onclick="initChartsC();" style="margin: 0px; height: 37px; width: 70px;margin-bottom: 15px">查询
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div id="mapChart"  style="height: 580px; width: 100%; padding: 10px; margin: auto"></div>
+                            </div>
                         </div>
                     </div>
 
                 </div>
             </div>
-
             </div>
             </div>
 
