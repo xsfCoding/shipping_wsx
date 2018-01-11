@@ -77,7 +77,16 @@
             <!--tiles start-->
             <div class="row">
                 <div class="col-md-12">
-
+                    <div class="col-md-3">
+                        <div class="dashboard-tile detail tile-blue hvr-grow" onclick="initUpPort()">
+                            <div class="content">
+                                <h1 class="text-left timer" id="upPort"></h1>
+                                <p id="upPortRate">港口数量</p>
+                            </div>
+                            <div class="icon"><i class="fa fa fa-envelope"></i>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-3">
                         <div class="dashboard-tile detail tile-red hvr-grow" onclick="initUpPrice()">
                             <div class="content">
@@ -90,16 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="dashboard-tile detail tile-blue hvr-grow" onclick="initUpPort()">
-                            <div class="content">
-                                <h1 class="text-left timer" id="upPort"></h1>
-                                <p id="upPortRate">港口数量</p>
-                            </div>
-                            <div class="icon"><i class="fa fa fa-envelope"></i>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="col-md-3">
                         <div class="dashboard-tile detail tile-turquoise hvr-grow" onclick="initUpLine()">
                             <div class="content">
@@ -292,6 +292,7 @@
 <script src="assets/script/app.js"></script>
 <script src="assets/script/companyPaticular.js"></script>
 <script src="js/theme/macarons.js"></script>
+<script src="js/extension/bmap.js"></script>
 <script src="assets/script/service/companyPaticularService.js"></script>
 
 <script type="text/javascript">
