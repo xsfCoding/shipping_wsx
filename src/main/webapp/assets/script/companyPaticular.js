@@ -24,6 +24,10 @@ function getCommonData() {
             shipComp.sort(compareAsc('name'));
             for (var i = 0; i < shipComp.length; i++) {
                 $('#ship').append("<option value=" + shipComp[i].id + ">" + shipComp[i].name + "</option>");
+                // $('li').onclick(function(){
+                //     initChartsC();
+                //
+                // });
             }
             $('#ship').selectpicker('refresh');
         }
@@ -210,72 +214,6 @@ function getChart(type) {
     });
 }
 
-function setTableData(shipid) {
-    var details = ProcessCompanyData.processDetails(companyData, shipid);
-    var tableData = details.tableData;
-
-    $('#mytab').bootstrapTable('refreshOptions', {
-        columns: [{
-            field: 'quotationId',
-            title: '价格表ID',
-            sortable: true
-        }, {
-            field: 'closingTimeBegin',
-            title: '截关开始日期',
-            sortable: true
-        }, {
-            field: 'closingTimeEnd',
-            title: '截关结束日期',
-            sortable: true
-        }, {
-            field: 'loadingPort',
-            title: '起运港',
-            sortable: true
-        },
-        //     {
-        //     field: 'loadingWharf',
-        //     title: '装载码头',
-        //     sortable: true
-        // },
-            {
-            field: 'dischargingPort',
-            title: '目的港',
-            sortable: true
-        },
-        //     {
-        //     field: 'sailingDate',
-        //     title: '船期',
-        //     sortable: true
-        // },
-            {
-            field: 'transshipmentPort',
-            title: '中转港',
-            sortable: true
-        }, {
-            field: 'voyage',
-            title: '航程',
-            sortable: true
-        }, {
-            field: 'currency',
-            title: '货币',
-            sortable: true
-        }, {
-            field: 'price20',
-            title: '20',
-            sortable: true
-        }, {
-            field: 'price40',
-            title: '40',
-            sortable: true
-        }, {
-            field: 'price40h',
-            title: '40H',
-            sortable: true
-        }]
-    });
-    $('#mytab').bootstrapTable('load', tableData);
-}
-
 function initMap(ec, url, title) {
 
     var myChart = ec.init(document.getElementById('mapChart'));
@@ -334,7 +272,18 @@ function initMap(ec, url, title) {
             },
             data: [],
             // 自定义名称
-            nameMap: countryName
+            nameMap: countryName,
+            baseLayer: {
+                backgroundColor: '',
+                backgroundImage: '../../asset/earth.jpg',
+                quality: 'high',
+            },
+
+            surfaceLayers: [{
+                type: 'texture',
+                distance: 3,
+                image: '../../asset/clouds.png'
+            }],
         }
     );
 
