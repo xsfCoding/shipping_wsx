@@ -568,22 +568,22 @@ li.dropdown ul.dropdown-menu.alert > li h1 {
 }
 
 .dashboard-tile.tile-turquoise {
-    background-color: #1abc9c;
+    background-color: #f39c12;
     color: #fff
 }
 
 .dashboard-tile.tile-red {
-    background-color: #e84c3d;
+    background-color: #00a65a;
     color: #fff
 }
 
 .dashboard-tile.tile-blue {
-    background-color: #3598db;
+    background-color: #00c0ef;
     color: #fff
 }
 
 .dashboard-tile.tile-purple {
-    background-color: #9a59b5;
+    background-color: #dd4b39;
     color: #fff
 }
 

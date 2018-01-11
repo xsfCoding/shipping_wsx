@@ -46,8 +46,8 @@ function initCharts() {
 							options);
 					var upCompany = new CountUp("upCompany", 0, sum[3], 0, 2.5,
 							options);
+                    upCompany.start();
 					upPrice.start();
-					upCompany.start();
 					upLine.start();
 					upPort.start();
 
@@ -61,7 +61,7 @@ function initCharts() {
 					// 		+ rate[3];
 
 					initLeftMap();
-					initUpPrice();
+                    initUpPort();
 				}
 			});
 
@@ -85,13 +85,13 @@ function initUpPrice() {
 	var priceData = ProcessData.processUpPrice(boardData.upPrice.detail);
 
 	var option = {
-        backgroundColor: '#394056',
+        // backgroundColor: '#394056',
         title: {
             text : '相比去年新增报价频次',
             textStyle: {
                 fontWeight: 'normal',
                 fontSize: 16,
-                color: '#F1F1F3'
+                color: '#000000'
             },
             left: '6%'
         },
@@ -249,13 +249,13 @@ function initUpPort() {
 
     var option = {
 
-        backgroundColor: '#23243a',
+        // backgroundColor: '#23243a',
         title : {
             text : '相比去年港口覆盖个数',
             textStyle: {
                 fontWeight: 'normal',
                 fontSize: 16,
-                color: '#F1F1F3'
+                color: '#000000'
             },
             left: '6%'
         },
@@ -438,7 +438,7 @@ function initUpLine() {
 	var lineData = ProcessData.processUpLine(boardData.upLine.detail);
 
 	var option = {
-        backgroundColor: '#000066',
+        // backgroundColor: '#003D79',
         tooltip: {
             trigger: 'item',
             formatter: "{a} <br/>{b}: {c} ({d}%)",
@@ -451,7 +451,7 @@ function initUpLine() {
             align: 'left',
             data : lineData.data1,
             textStyle: {
-                color: '#FFFFFF'
+                color:  '#000000'
             }
         },
         series: [
@@ -518,7 +518,7 @@ function initUpCompany() {
 	var company = ProcessData.processUpCompany(boardData);
     var count = 0;
         option = {
-            backgroundColor:'#333366',
+            // backgroundColor:'#333366',
             title: {
                 text: '船公司数量',
                 x: 'center',
@@ -526,7 +526,7 @@ function initUpCompany() {
                 textStyle: {
                     fontWeight: 'normal',
                     fontSize: 16,
-                    color: '#F1F1F3'
+                    color: '#000000'
                 },
 
             },
@@ -539,7 +539,7 @@ function initUpCompany() {
                 y: 'bottom',
                 data : company.legend,
                 textStyle: {
-                    color: '#FFFFFF'
+                    color: '#000000'
                 }
             },
             calculable: true,
@@ -567,7 +567,7 @@ function initLeftMap() {
 	var myChartMap = echarts.init(document.getElementById('selaMap'));
 	var portMap = ProcessData.processLeftMap(boardData);
 	var option = {
-        backgroundColor: '#686868',
+        backgroundColor: '#f1f1f1',
         tooltip : {
 			formatter : function(e) {
 				// console.log(e);
@@ -616,8 +616,8 @@ function initLeftMap() {
             },
             itemStyle: {
                 normal: {
-                    areaColor: '#B8B8B8',
-                    borderColor: '#111'
+                    areaColor: '#333',
+                    borderColor: '#fff'
                 },
                 emphasis: {
                     areaColor: '#2a333d'
