@@ -85,7 +85,7 @@ function initUpPrice() {
 	var priceData = ProcessData.processUpPrice(boardData.upPrice.detail);
 
 	var option = {
-
+        backgroundColor: '#192469',
             title : {
                 text : '相比去年新增报价频次',
                 textStyle: {
@@ -251,7 +251,7 @@ function initUpPort() {
 
     var option = {
 
-
+        backgroundColor: '#23243a',
         title : {
             text : '相比去年港口覆盖个数',
             textStyle: {
@@ -440,6 +440,7 @@ function initUpLine() {
 	var lineData = ProcessData.processUpLine(boardData.upLine.detail);
 
 	var option = {
+        backgroundColor: '#000066',
         tooltip: {
             trigger: 'item',
             formatter: "{a} <br/>{b}: {c} ({d}%)",
@@ -452,7 +453,7 @@ function initUpLine() {
             align: 'left',
             data : lineData.data1,
             textStyle: {
-                color: '#404040'
+                color: '#FFFFFF'
             }
         },
         series: [
@@ -515,15 +516,21 @@ function initUpLine() {
  * 相比去年每个公司在报价中的占比 取前十 1.公司报价/报价总额 百分比
  */
 function initUpCompany() {
-
 	var myChartUpPrice = echarts.init(document.getElementById('upChart'));
 	var company = ProcessData.processUpCompany(boardData);
     var count = 0;
         option = {
+            backgroundColor:'#333366',
             title: {
-                text: '选科推荐',
+                text: '船公司数量',
                 x: 'center',
-                y: 'center'
+                y: 'center',
+                textStyle: {
+                    fontWeight: 'normal',
+                    fontSize: 16,
+                    color: '#F1F1F3'
+                },
+
             },
             tooltip: {
                 trigger: 'item',
@@ -532,7 +539,10 @@ function initUpCompany() {
             legend: {
                 x: 'center',
                 y: 'bottom',
-                data : company.legend
+                data : company.legend,
+                textStyle: {
+                    color: '#FFFFFF'
+                }
             },
             calculable: true,
             series: [
@@ -543,6 +553,7 @@ function initUpCompany() {
                     center: ['50%', '50%'],
                     roseType: 'radius',
                     data: company.series
+
                 }
             ]
         }
