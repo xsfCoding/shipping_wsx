@@ -85,158 +85,156 @@ function initUpPrice() {
 	var priceData = ProcessData.processUpPrice(boardData.upPrice.detail);
 
 	var option = {
-        backgroundColor: '#192469',
-            title : {
-                text : '相比去年新增报价频次',
-                textStyle: {
-                    fontWeight: 'normal',
-                    fontSize: 16,
-                    color: '#F1F1F3'
-                },
-                left: '6%'
+        backgroundColor: '#394056',
+        title: {
+            text : '相比去年新增报价频次',
+            textStyle: {
+                fontWeight: 'normal',
+                fontSize: 16,
+                color: '#F1F1F3'
             },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    lineStyle: {
-                        color: '#57617B'
-                    }
-                },
-                formatter : "{b}</br>{a0}：{c0}次</br>{a1}：{c1}次"
-            },
-
-            legend: {
-                icon: 'rect',
-                itemWidth: 14,
-                itemHeight: 5,
-                itemGap: 13,
-
-                right: '4%',
-                textStyle: {
-                    fontSize: 12,
-                    color: '#292f39'
-                },
-                data : [ boardData.lastYear, boardData.thisYear ],
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            xAxis: [{
-
-                type : 'category',
-                boundaryGap : false,
-                data : [ '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月',
-                    '10月', '11月', '12月' ],
-                axisLine: {
-                    lineStyle: {
-                        color: '#0483eb'
-                    }
-                },
-
-
-            }],
-
-
-            yAxis: [{
-                type: 'value',
-
-                axisTick: {
-                    show: false
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: '#0483eb'
-                    }
-                },
-                axisLabel: {
-                    margin: 10,
-                    textStyle: {
-                        fontSize: 12
-                    }
-                },
-                splitLine: {
-                    lineStyle: {
-                        color: '#17367c'
-                    }
-                }
-            }],
-
-
-
-            series: [{
-                name : boardData.lastYear,
-                type: 'line',
-                smooth: false,
-                symbolSize:6,
-                symbol:'circle',
-                stack : '总量1',
-
+            left: '6%'
+        },
+        tooltip: {
+            trigger: 'axis',
+            formatter : "{b}</br>{a0}：{c0}次</br>{a1}：{c1}次",
+            axisPointer: {
                 lineStyle: {
-                    normal: {
-                        width: 2
-                    },
+                    color: '#57617B'
+                }
+            }
+        },
+        legend: {
+            icon: 'rect',
+            itemWidth: 14,
+            itemHeight: 5,
+            itemGap: 13,
+            data : [ boardData.lastYear, boardData.thisYear ],
+            right: '5%',
+            textStyle: {
+                fontSize: 12,
+                color: '#F1F1F3'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox : {
+            feature : {
+                saveAsImage : {}
+            }
+        },
+        xAxis: [{
+            type: 'category',
 
-                },
-
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgba(112, 161, 250, 0.3)'
-                        }, {
-                            offset: 0.8,
-                            color: 'rgba(112, 161, 250, 0)'
-                        }], false),
-                        shadowColor: 'rgba(0, 0, 0, 0.1)',
-                        shadowBlur: 10
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: '#70a1fa'
-                    }
-                },
-                data : priceData.data2
+            axisLine: {
+                lineStyle: {
+                    color: '#57617B'
+                }
             },
-                {
-                    name: boardData.lastYear,
-                    type: 'line',
-                    smooth: false,
-                    symbolSize: 6,
-                    symbol: 'circle',
-                    stack: '总量2',
+            data : [ '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月',
+                '10月', '11月', '12月' ]
+        }
+        ],
+        yAxis: [{
+            type: 'value',
 
-                    lineStyle: {
-                        normal: {
-                            width: 2
-                        },
+            axisTick: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#57617B'
+                }
+            },
+            axisLabel: {
+                margin: 10,
+                textStyle: {
+                    fontSize: 14
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#57617B'
+                }
+            }
+        }],
+        series: [{
+            name : boardData.lastYear,
+            type: 'line',
+            smooth: true,
+            symbol: 'circle',
+            symbolSize: 5,
+            showSymbol: false,
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(137, 189, 27, 0.3)'
+                    }, {
+                        offset: 0.8,
+                        color: 'rgba(137, 189, 27, 0)'
+                    }], false),
+                    shadowColor: 'rgba(0, 0, 0, 0.1)',
+                    shadowBlur: 10
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: 'rgb(137,189,27)',
+                    borderColor: 'rgba(137,189,2,0.27)',
+                    borderWidth: 12
 
-                    },
+                }
+            },
+            data : priceData.data2
+        }, {
+            name:  boardData.thisYear,
+            type: 'line',
+            smooth: true,
+            symbol: 'circle',
+            symbolSize: 5,
+            showSymbol: false,
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(0, 136, 212, 0.3)'
+                    }, {
+                        offset: 0.8,
+                        color: 'rgba(0, 136, 212, 0)'
+                    }], false),
+                    shadowColor: 'rgba(0, 0, 0, 0.1)',
+                    shadowBlur: 10
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: 'rgb(0,136,212)',
+                    borderColor: 'rgba(0,136,212,0.2)',
+                    borderWidth: 12
 
-                    areaStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: 'rgba(112, 161, 250, 0.3)'
-                            }, {
-                                offset: 0.8,
-                                color: 'rgba(112, 161, 250, 0)'
-                            }], false),
-                            shadowColor: 'rgba(0, 0, 0, 0.1)',
-                            shadowBlur: 10
-                        }
-                    },
-                    itemStyle: {
-                        normal: {
-                            color: '#70a1fa'
-                        }
-                    },
-                    data: priceData.data1
-                }]
-        };
+                }
+            },
+            data : priceData.data1
+
+        }]
+    };
+
+
 	myChartUpPrice.setOption(option);
 }
 
@@ -565,10 +563,11 @@ function initUpCompany() {
  * 标注每个港口的一个价格增幅情况
  */
 function initLeftMap() {
+
 	var myChartMap = echarts.init(document.getElementById('selaMap'));
 	var portMap = ProcessData.processLeftMap(boardData);
 	var option = {
-        backgroundColor: '#F0F0F0',
+        backgroundColor: '#686868',
         tooltip : {
 			formatter : function(e) {
 				// console.log(e);
@@ -605,49 +604,72 @@ function initLeftMap() {
 
 		geo : {
 			map : 'world',
-            itemStyle: {					// 定义样式
-                normal: {					// 普通状态下的样式
-                    areaColor: '#909090',
-                    borderColor: '#111'
-                },
-                emphasis: {					// 高亮状态下的样式
-                    areaColor: '#2a333d'
+
+
+        left: 0,
+        right: 0,
+
+            label : {
+                emphasis : {
+                    show : false
                 }
             },
-			label : {
-				emphasis : {
-					show : false
-				}
-			},
-			roam : true
+            itemStyle: {
+                normal: {
+                    areaColor: '#B8B8B8',
+                    borderColor: '#111'
+                },
+                emphasis: {
+                    areaColor: '#2a333d'
+                }
 
-		},
+            },
+
+            roam : true
+
+        },
 
 		legend : {
 			data : [],
-			left : 'left'
+			left : 'left',
+
+            textStyle: {
+
+                 color: '#000000'
+            },
 		},
         series: [
             {
+                type: 'scatter',
+                coordinateSystem: 'geo',
 
-                type: 'scatter', // series图表类型
-                coordinateSystem: 'geo', // series坐标系类型
+                symbolSize: 3,
+                // large: true,
+                largeThreshold: 100,
+                itemStyle: {
+                    normal: {
+                        opacity: 0.4
+                    }
+                },
+                // 设置混合模式为叠加
+                blendMode: 'lighter',
+
             }
         ],
 
-        visualMap: {
-            type: 'continuous', // 连续型
-            min: 0,       		// 值域最小值，必须参数
-            max: 200,			// 值域最大值，必须参数
-            calculable: true,	// 是否启用值域漫游
-            inRange: {
-                color:['#6633CC', '#CC0000', '#000033']
-                // 指定数值从低到高时的颜色变化
-            },
-            textStyle: {
-                color: '#fff'	// 值域控件的文本颜色
-            }
-        }
+        // visualMap: {
+        //     type: 'continuous', // 连续型
+        //     min: 0,       		// 值域最小值，必须参数
+        //     max: 200,			// 值域最大值，必须参数
+        //     calculable: true,	// 是否启用值域漫游
+        //     // inRange: {
+        //     //     color:['#6633CC', '#CC0000', '#000033']
+        //     //     // 指定数值从低到高时的颜色变化
+        //     // },
+        //     textStyle: {
+        //         color: '#fff'	// 值域控件的文本颜色
+        //     }
+        // }
 
 	};
 	var legend = [];
@@ -692,6 +714,7 @@ function initLeftMap() {
 	}
 	;
 	option.legend.data = legend;
+
 
 	myChartMap.setOption(option);
 };
