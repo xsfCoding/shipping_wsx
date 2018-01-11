@@ -85,7 +85,7 @@ function initUpPrice() {
 	var priceData = ProcessData.processUpPrice(boardData.upPrice.detail);
 
 	var option = {
-            backgroundColor: '#192469',
+
             title : {
                 text : '相比去年新增报价频次',
                 textStyle: {
@@ -240,84 +240,195 @@ function initUpPrice() {
 	myChartUpPrice.setOption(option);
 }
 
+
+
 /*
  * 相比去年增加港口 1.按照月份统计每个月的港口覆盖数作对比
  */
 function initUpPort() {
 	var myChartUpPrice = echarts.init(document.getElementById('upChart'));
 	var portData = ProcessData.processUpPort(boardData.upPort.detail);
-	var option = {
-		title : {
-			text : '相比去年港口覆盖个数'
-		},
-		tooltip : {
-			trigger : 'axis'
-		},
-		legend : {
-			data : [ boardData.lastYear, boardData.thisYear ],
-			right : '5%'
-		},
-		toolbox : {
-			show : true,
-			feature : {
-				saveAsImage : {
-					show : true
-				}
-			}
-		},
-		calculable : true,
-		xAxis : [ {
-			type : 'category',
-			data : [ '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月',
-					'10月', '11月', '12月' ]
-		} ],
-		yAxis : [ {
-			type : 'value'
-		} ],
-		series : [ {
-			name : boardData.lastYear,
-			type : 'bar',
-			data : portData.data2,
-			markPoint : {
-				data : [ {
-					type : 'max',
-					name : '最大值'
-				}, {
-					type : 'min',
-					name : '最小值'
-				} ]
-			},
-			markLine : {
-				data : [ {
-					type : 'average',
-					name : '平均值'
-				} ]
-			}
-		}, {
-			name : boardData.thisYear,
-			type : 'bar',
-			data : portData.data1,
-			markPoint : {
-				data : [ {
-					name : '年最高',
-					value : 182.2,
-					xAxis : 7,
-					yAxis : 183
-				}, {
-					name : '年最低',
-					value : 2.3,
-					xAxis : 11,
-					yAxis : 3
-				} ]
-			},
-			markLine : {
-				data : [ {
-					type : 'average',
-					name : '平均值'
-				} ]
-			}
-		} ]
-	};
+
+    var option = {
+
+
+        title : {
+            text : '相比去年港口覆盖个数',
+            textStyle: {
+                fontWeight: 'normal',
+                fontSize: 16,
+                color: '#F1F1F3'
+            },
+            left: '6%'
+        },
+        tooltip: { //提示框组件
+            trigger: 'axis',
+            formatter: '{b}<br />{a0}: {c0}<br />{a1}: {c1}',
+            axisPointer: {
+                type: 'shadow',
+                label: {
+                    backgroundColor: '#6a7985'
+                }
+            },
+            textStyle: {
+                color: '#fff',
+                fontStyle: 'normal',
+                fontFamily: '微软雅黑',
+                fontSize: 12,
+            }
+        },
+        grid: {
+            left: '1%',
+            right: '4%',
+            bottom: '6%',
+            top:30,
+            padding:'0 0 10 0',
+            containLabel: true,
+        },
+        legend: {//图例组件，颜色和名字
+            right:10,
+            top:0,
+            itemGap: 16,
+            itemWidth: 18,
+            itemHeight: 10,
+            data : [ boardData.lastYear, boardData.thisYear ],
+            textStyle: {
+                color: '#a8aab0',
+                fontStyle: 'normal',
+                fontFamily: '微软雅黑',
+                fontSize: 12,
+            }
+        },
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: true,//坐标轴两边留白
+                data : [ '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月',
+                    '10月', '11月', '12月' ],
+                axisLabel: { //坐标轴刻度标签的相关设置。
+                    interval: 0,//设置为 1，表示『隔一个标签显示一个标签』
+                    margin:15,
+                    textStyle: {
+                        color: '#078ceb',
+                        fontStyle: 'normal',
+                        fontFamily: '微软雅黑',
+                        fontSize: 12,
+                    }
+                },
+                axisTick:{//坐标轴刻度相关设置。
+                    show: false,
+                },
+                axisLine:{//坐标轴轴线相关设置
+                    lineStyle:{
+                        color:'#fff',
+                        opacity:0.2
+                    }
+                },
+                splitLine: { //坐标轴在 grid 区域中的分隔线。
+                    show: false,
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                splitNumber: 5,
+                axisLabel: {
+                    textStyle: {
+                        color: '#a8aab0',
+                        fontStyle: 'normal',
+                        fontFamily: '微软雅黑',
+                        fontSize: 12,
+                    }
+                },
+                axisLine:{
+                    show: false
+                },
+                axisTick:{
+                    show: false
+                },
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        color: ['#fff'],
+                        opacity:0.06
+                    }
+                }
+
+            }
+        ],
+        series : [
+            {
+                name:boardData.lastYear,
+                type:'bar',
+                data:portData.data2,
+                barWidth: 10,
+                barGap:0,//柱间距离
+                label: {//图形上的文本标签
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        textStyle: {
+                            color: '#a8aab0',
+                            fontStyle: 'normal',
+                            fontFamily: '微软雅黑',
+                            fontSize: 12,
+                        },
+                    },
+                },
+                itemStyle: {//图形样式
+                    normal: {
+                        barBorderRadius: [5, 5, 0, 0],
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 1, color: 'rgba(127, 128, 225, 0.7)'
+                        },{
+                            offset: 0.9, color: 'rgba(72, 73, 181, 0.7)'
+                        },{
+                            offset: 0.31, color: 'rgba(0, 208, 208, 0.7)'
+                        },{
+                            offset: 0.15, color: 'rgba(0, 208, 208, 0.7)'
+                        }, {
+                            offset: 0, color: 'rgba(104, 253, 255, 0.7)'
+                        }], false),
+                    },
+                },
+            },
+            {
+                name:boardData.thisYear,
+                type:'bar',
+                data:portData.data1,
+                barWidth: 10,
+                barGap:0.2,//柱间距离
+                label: {//图形上的文本标签
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        textStyle: {
+                            color: '#a8aab0',
+                            fontStyle: 'normal',
+                            fontFamily: '微软雅黑',
+                            fontSize: 12,
+                        },
+                    },
+                },
+                itemStyle: {//图形样式
+                    normal: {
+                        barBorderRadius: [5, 5, 0, 0],
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 1, color: 'rgba(127, 128, 225, 0.7)'
+                        },{
+                            offset: 0.9, color: 'rgba(72, 73, 181, 0.7)'
+                        },{
+                            offset: 0.25, color: 'rgba(226, 99, 74, 0.7)'
+                        }, {
+                            offset: 0, color: 'rgba(253, 200, 106, 0.7)'
+                        }], false),
+                    },
+                },
+            }
+        ]
+    };
+
 	myChartUpPrice.setOption(option);
 }
 
@@ -329,86 +440,112 @@ function initUpLine() {
 	var lineData = ProcessData.processUpLine(boardData.upLine.detail);
 
 	var option = {
-		tooltip : {
-			trigger : 'item',
-			formatter : "{a} <br/>{b}: {c} ({d}%)"
-		},
-		legend : {
-			orient : 'vertical',
-			x : 'left',
-			data : lineData.data1
-		},
-		series : [ {
-			name : '2016报价频次(占比)',
-			type : 'pie',
-			radius : [ '50%', '70%' ],
-			avoidLabelOverlap : false,
-			label : {
-				normal : {
-					show : false,
-					position : 'center'
-				},
-				emphasis : {
-					show : true,
-					textStyle : {
-						fontSize : '30',
-						fontWeight : 'bold'
-					}
-				}
-			},
-			labelLine : {
-				normal : {
-					show : false
-				}
-			},
-			data : boardData.upLine.detail
-		} ]
-	};
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)",
+        },
+        legend: {
+            orient: 'vertical',
+            x: 'right',
+            itemWidth: 14,
+            itemHeight: 14,
+            align: 'left',
+            data : lineData.data1,
+            textStyle: {
+                color: '#404040'
+            }
+        },
+        series: [
+            {
+                name:'访问来源',
+                type:'pie',
+                hoverAnimation: false,
+                legendHoverLink:false,
+                radius: ['40%', '42%'],
+                color: ['#915872', '#3077b7', '#9a8169', '#3f8797','#5b8144','#307889','#9c6a79'
+                ],
+                label: {
+                    normal: {
+                        position: 'inner'
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    },
+
+                },
+                tooltip: {
+                    show:false,
+
+
+                },
+
+                data:[
+                    {value:435, name:''},
+                    {value:679, name:''},
+                    {value:848, name:''},
+                    {value:348, name:''},
+                    {value:679, name:''},
+                    {value:848, name:''},
+                    {value:348, name:''}
+                ]
+            },
+            {
+                name:'访问来源',
+                type:'pie',
+                radius: ['42%', '55%'],
+                color: ['#d74e67', '#0092ff', '#eba954', '#21b6b9','#60a900','#01949b',' #f17677'],
+                label: {
+                    normal: {
+                        formatter: '{b}\n{d}%'
+                    },
+
+                },
+                data : boardData.upLine.detail,
+            }
+        ]
+    };
 	myChartUpPrice.setOption(option);
 }
+
+
 
 /*
  * 相比去年每个公司在报价中的占比 取前十 1.公司报价/报价总额 百分比
  */
 function initUpCompany() {
+
 	var myChartUpPrice = echarts.init(document.getElementById('upChart'));
 	var company = ProcessData.processUpCompany(boardData);
-	var option = {
-		tooltip : {
-			trigger : 'item',
-			formatter : "{a} <br/>{b}: {c} ({d}%)"
-		},
-		legend : {
-			orient : 'vertical',
-			x : 'left',
-			data : company.legend
-		},
-		series : [ {
-			name : '2016公司报价个数(占比)',
-			type : 'pie',
-			radius : [ '50%', '70%' ],
-			avoidLabelOverlap : false,
-			label : {
-				normal : {
-					show : false,
-					position : 'center'
-				},
-				emphasis : {
-					show : true,
-					textStyle : {
-						fontSize : '30',
-						fontWeight : 'bold'
-					}
-				}
-			},
-			labelLine : {
-				normal : {
-					show : false
-				}
-			},
-			data : company.series
-		} ]
-	};
+    var count = 0;
+        option = {
+            title: {
+                text: '选科推荐',
+                x: 'center',
+                y: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter : "{a} <br/>{b}: {c} ({d}%)"
+            },
+            legend: {
+                x: 'center',
+                y: 'bottom',
+                data : company.legend
+            },
+            calculable: true,
+            series: [
+                {
+                    color: ['#fe8eae', '#fea1cc', '#fca8e1', '#de9cfd', '#d0a8fc', '#fcba61', '#f5d978', '#f5ed78', '#c8f578', '#9df174', '#6fea8e', '#78f597', '#65db99', '#78f5af', '#7bebc3', '#78f5d7', '#78f4f5', '#78d6f5', '#78bff5', '#7899f5'],
+                    type: 'pie',
+                    radius: [60, 160],
+                    center: ['50%', '50%'],
+                    roseType: 'radius',
+                    data: company.series
+                }
+            ]
+        }
 	myChartUpPrice.setOption(option);
 }
 

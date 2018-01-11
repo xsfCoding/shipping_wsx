@@ -515,44 +515,37 @@ function initUpLine() {
  * 相比去年每个公司在报价中的占比 取前十 1.公司报价/报价总额 百分比
  */
 function initUpCompany() {
+
 	var myChartUpPrice = echarts.init(document.getElementById('upChart'));
 	var company = ProcessData.processUpCompany(boardData);
-	var option = {
-		tooltip : {
-			trigger : 'item',
-			formatter : "{a} <br/>{b}: {c} ({d}%)"
-		},
-		legend : {
-			orient : 'vertical',
-			x : 'left',
-			data : company.legend
-		},
-		series : [ {
-			name : '2016公司报价个数(占比)',
-			type : 'pie',
-			radius : [ '50%', '70%' ],
-			avoidLabelOverlap : false,
-			label : {
-				normal : {
-					show : false,
-					position : 'center'
-				},
-				emphasis : {
-					show : true,
-					textStyle : {
-						fontSize : '30',
-						fontWeight : 'bold'
-					}
-				}
-			},
-			labelLine : {
-				normal : {
-					show : false
-				}
-			},
-			data : company.series
-		} ]
-	};
+    var count = 0;
+        option = {
+            title: {
+                text: '选科推荐',
+                x: 'center',
+                y: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter : "{a} <br/>{b}: {c} ({d}%)"
+            },
+            legend: {
+                x: 'center',
+                y: 'bottom',
+                data : company.legend
+            },
+            calculable: true,
+            series: [
+                {
+                    color: ['#fe8eae', '#fea1cc', '#fca8e1', '#de9cfd', '#d0a8fc', '#fcba61', '#f5d978', '#f5ed78', '#c8f578', '#9df174', '#6fea8e', '#78f597', '#65db99', '#78f5af', '#7bebc3', '#78f5d7', '#78f4f5', '#78d6f5', '#78bff5', '#7899f5'],
+                    type: 'pie',
+                    radius: [60, 160],
+                    center: ['50%', '50%'],
+                    roseType: 'radius',
+                    data: company.series
+                }
+            ]
+        }
 	myChartUpPrice.setOption(option);
 }
 
