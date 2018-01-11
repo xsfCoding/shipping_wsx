@@ -141,12 +141,11 @@ function initBarChart(ec, id) {
         cname = companyData.dischargingports[0].shippingCompany;
     }
     var barData = ProcessCompanyData.processShippingLine(companyData.lineCovers, cname);
-    // console.log(barData.legend);
+
     var option2 = {
         title: {
             text: '热门航线',
-            x: 'center',
-            y: 'top'
+            x: 'center'
         },
         tooltip: {
             trigger: 'item',
@@ -163,51 +162,40 @@ function initBarChart(ec, id) {
             y: 80,
             y2: 60
         },
-        dataRange: {
-            show: false,
-            min : 0,
-            max : 12,
-            calculable : true,
-            color: ['#d94e5d','#eac736','#50a3ba'],
-            y:'center',
-        },
         yAxis: [
-            {
-                type: 'category',
-                show: false,
-            }
-        ],
-        xAxis: [
             {
                 type: 'category',
                 show: false,
                 data: barData.legend
             }
         ],
-
+        xAxis: [
+            {
+                type: 'value',
+                show: false
+            }
+        ],
         series: [
             {
+                // name: 'ECharts例子个数统计',
                 type: 'bar',
-                barGap: 0.2,
-                barCategoryGap: 0.01,
+                barGap: '40%',
+                barCategoryGap: '50%',
                 itemStyle: {
                     normal: {
                         color: function (params) {
                             // build a color map as your need.
                             var colorList = [
-                                '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
-                                '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
-                                '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                                '#f15b6c','#b7ba6b','#33a3dc','#ffe600','#f58f98','#76becc',
+                                '#ffc20e','#deab8a','#6f599c','#11264f','#aa2116'
                             ];
                             return colorList[params.dataIndex]
                         },
                         label: {
                             show: true,
-                            position: 'top',
+                            position: 'left',
                             formatter: '{b}\n{c}'
-                        },
-                        shadowBlur: 80,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
                     }
                 },
                 data: barData.chartData
