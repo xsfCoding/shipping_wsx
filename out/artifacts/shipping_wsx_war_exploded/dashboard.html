@@ -72,81 +72,82 @@
             <div class="row">
                 <div class="col-md-12">
 
-                        <div class="col-md-3">
-                            <div class="dashboard-tile detail tile-red hvr-grow" onclick="initUpPrice()">
-                                <div class="content">
-                                    <h1 class="text-left timer" id="upPrice"></h1>
-                                    <p id="upPriceRate">
-                                        报价频次
-                                    </p>
-                                </div>
-                                <div class="icon"><i class="fa fa-users"></i>
-                                </div>
+                    <div class="col-md-3">
+                        <div class="dashboard-tile detail tile-red hvr-grow" onclick="initUpPrice()">
+                            <div class="content">
+                                <h1 class="text-left timer" id="upPrice"></h1>
+                                <p id="upPriceRate">
+                                    报价频次
+                                </p>
+                            </div>
+                            <div class="icon"><i class="fa fa-users"></i>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="dashboard-tile detail tile-blue hvr-grow" onclick="initUpPort()">
-                                <div class="content">
-                                    <h1 class="text-left timer" id="upPort"></h1>
-                                    <p id="upPortRate">港口数量</p>
-                                </div>
-                                <div class="icon"><i class="fa fa fa-envelope"></i>
-                                </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="dashboard-tile detail tile-blue hvr-grow" onclick="initUpPort()">
+                            <div class="content">
+                                <h1 class="text-left timer" id="upPort"></h1>
+                                <p id="upPortRate">港口数量</p>
+                            </div>
+                            <div class="icon"><i class="fa fa fa-envelope"></i>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="dashboard-tile detail tile-turquoise hvr-grow" onclick="initUpLine()">
-                                <div class="content">
-                                    <h1 class="text-left timer" id="upLine"></h1>
-                                    <p id="upLineRate">航线数量</p>
-                                </div>
-                                <div class="icon"><i class="fa fa-comments"></i>
-                                </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="dashboard-tile detail tile-turquoise hvr-grow" onclick="initUpLine()">
+                            <div class="content">
+                                <h1 class="text-left timer" id="upLine"></h1>
+                                <p id="upLineRate">航线数量</p>
+                            </div>
+                            <div class="icon"><i class="fa fa-comments"></i>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="dashboard-tile detail tile-purple hvr-grow" onclick="initUpCompany()">
-                                <div class="content">
-                                    <h1 class="text-left timer" id="upCompany"></h1>
-                                    <p id="upCompanyRate">船公司数量</p>
-                                </div>
-                                <div class="icon"><i class="fa fa-bar-chart-o"></i>
-                                </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="dashboard-tile detail tile-purple hvr-grow" onclick="initUpCompany()">
+                            <div class="content">
+                                <h1 class="text-left timer" id="upCompany"></h1>
+                                <p id="upCompanyRate">船公司数量</p>
                             </div>
+                            <div class="icon"><i class="fa fa-bar-chart-o"></i>
+                            </div>
+                        </div>
 
                     </div>
                     <div class="col-md-12">
-                    <div class="col-md-7 col-sm-8" style="padding-left: 0px;">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">
-                                    <script type="application/javascript">
-                                        document.write(new Date().getFullYear() + "");
-                                    </script>
-                                    年各港口价格增幅
-                                </h3>
-                                <div class="actions pull-right">
-                                    <i class="fa fa-chevron-down"></i>
-                                    <i class="fa fa-times"></i>
+                        <div class="col-md-7 col-sm-8" style="padding-left: 0px;">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <script type="application/javascript">
+                                            document.write(new Date().getFullYear() + "");
+                                        </script>
+                                        年各港口价格增幅
+                                    </h3>
+                                    <div class="actions pull-right">
+                                        <i class="fa fa-chevron-down"></i>
+                                        <i class="fa fa-times"></i>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="selaMap" style="height: 520px;width: 100%"></div>
                                 </div>
                             </div>
-                            <div class="panel-body">
-                                <div id="selaMap" style="height: 520px;width: 100%"></div>
-                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-5 col-sm-18">
-                        <div class="panel panel-default">
+                        <div class="col-md-5 col-sm-18">
+                            <div class="panel panel-default">
 
-                            <div class="panel-body">
-                                <div id="upChart" style="height: 450px;width: 100%"></div>
+                                <div class="panel-body">
+                                    <div id="upChart" style="height: 450px;width: 100%"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
                     </div>
 
                 </div>
+            </div>
                 <!--tiles end-->
                 <!--dashboard charts and map start-->
                 <!--<div class="row">-->
@@ -168,7 +169,125 @@
                 <!--</div>-->
                 <!--dashboard charts and map end-->
 
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">船公司港口概况</h3>
+                                <div class="info-icon">
+                                    <i type="button" class="glyphicon glyphicon-info-sign popover-bottom"
+                                       data-container="body" data-toggle="popover" data-placement="bottom"
+                                       data-content="根据选择船公司，展示该船公司历史报价记录涵盖的港口地理位置和出现频次。">
+                                    </i>
+                                </div>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-chevron-down"></i>
+
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <div class="col-sm-5">
+                                            <label for="ship"></label>
+                                            <select id="ship" name="ship" class="selectpicker show-tick form-control"
+                                                    data-live-search="true" data-live-search-style="begins">
+                                            </select>
+                                        </div>
+                                        <!-- <div class="col-sm-3">
+                                            <label for="priceType"></label>
+                                            <select id="priceType" name="priceType" class="selectpicker show-tick form-control"  data-live-search="false" onchange="getEndPort(this.options[this.selectedIndex].text)">
+                                            <option value="0">-选择规格-</option>
+                                            <option value="price20">20规格</option>
+                                            <option value="price40">40规格</option>
+                                            <option value="price40h">40H规格</option>
+                                            </select>
+                                        </div> -->
+                                        <div class="col-sm-4">
+                                            <button type="button" class="btn btn-primary btn-trans"
+                                                    onclick="initChartsC();" style="margin-top: 4px;">查询
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div id="mapChart" style="height: 580px; width: 100%; padding: 10px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">港口航线分析</h3>
+                                <div class="info-icon">
+                                    <i type="button" class="glyphicon glyphicon-info-sign popover-bottom"
+                                       data-container="body" data-toggle="popover" data-placement="bottom"
+                                       data-content="根据选择船公司，展示该船公司历史报价记录涵盖的出现频次最高的热门港口和航线。">
+                                    </i>
+                                </div>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-chevron-down"></i>
+
+                                </div>
+                            </div>
+                            <div class="panel-body">
+
+                                <!--<div style="height: 105px; width: 100%;">-->
+                                <div class="tab-wrapper tab-bottom tab-primary">
+                                    <div class="tab-content" style="height: 520px;">
+                                        <div class="tab-pane active" id="tab1">
+                                            <div id="pieChart" style="height: 500px; width: 400px;"></div>
+                                        </div>
+                                        <div class="tab-pane" id="tab2">
+                                            <div id="barChart" style="height: 500px; width: 450px; margin: 0;"></div>
+                                        </div>
+
+                                    </div>
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#tab1" data-toggle="tab"
+                                                              onclick="getChart(1)">港口</a></li>
+                                        <li><a href="#tab2" data-toggle="tab"
+                                               onclick="getChart(2)">航线</a></li>
+                                    </ul>
+                                </div>
+                                <!--</div>-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">报价表单</h3>
+                                <div class="info-icon">
+                                    <i type="button" class="glyphicon glyphicon-info-sign popover-bottom"
+                                       data-container="body" data-toggle="popover" data-placement="bottom"
+                                       data-content="根据选择船公司，展示该船公司最新的100条报价数据。">
+                                    </i>
+                                </div>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-chevron-down"></i>
+
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div id="charts"
+                                     style="height: 320px; width: 100%; padding: 10px;">
+
+                                    <div style="width: 100%;height: 200px;float: left;">
+                                        <table id="mytab" class="table table-hover"></table>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </section>
+
     </section>
 
 </section>
@@ -188,15 +307,113 @@
 <script src="assets/script/service/dashboardService.js"></script>
 <script src="assets/script/dashboard.js"></script>
 <script src="js/theme/vintage.js"></script>
+
+<script src="js/echarts/echarts.js"></script>
+<script src="js/echarts-x/echarts-x.js"></script>
+<script src="assets/script/app.js"></script>
+<script src="assets/script/companyPaticular.js"></script>
+<script src="js/theme/macarons.js"></script>
+<script src="assets/script/service/companyPaticularService.js"></script>
+
 <script type="text/javascript">
     initCharts();
-
 </script>
 <script>
     $(function () {
         $("[data-toggle='tooltip']").tooltip();
     });
 </script>
+<script src="assets/plugins/table/bootstrap-table.min.js"></script>
+<script src="assets/plugins/table/bootstrap-table-zh-CN.min.js"></script>
+<script src="assets/plugins/bootstrap-select.min.js"></script>
+
+
+
+<script>
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+    function test() {
+        $(".actions > .fa-chevron-down").click(
+            function() {
+                $(this).parent().parent().next().slideToggle("fast"),
+                    $(this).toggleClass(
+                        "fa-chevron-down fa-chevron-up")
+            });
+
+        $('#reportTable').bootstrapTable({
+            method: 'get',
+            url: 'data/table.json',
+            dataType: "json",
+            striped: true,	 //使表格带有条纹
+            pagination: true,	//在表格底部显示分页工具栏
+            pageSize: 22,
+            pageNumber: 1,
+            pageList: [10, 20, 50, 100, 200, 500],
+            idField: "ProductId",  //标识哪个字段为id主键
+            showToggle: false,   //名片格式
+            cardView: false,//设置为True时显示名片（card）布局
+            showColumns: true, //显示隐藏列
+            showRefresh: true,  //显示刷新按钮
+            singleSelect: true,//复选框只能选择一条记录
+            search: false,//是否显示右上角的搜索框
+            clickToSelect: true,//点击行即可选中单选/复选框
+            sidePagination: "server",//表格分页的位置
+//				queryParams: queryParams, //参数
+            queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求
+            toolbar: "#toolbar",//设置工具栏的Id或者class
+//				columns: column, //列
+            silent: true,  //刷新事件必须设置
+            formatLoadingMessage: function () {
+                return "请稍等，正在加载中...";
+            },
+            formatNoMatches: function () {  //没有匹配的结果
+                return '无符合条件的记录';
+            },
+            onLoadError: function (data) {
+                $('#reportTable').bootstrapTable('removeAll');
+            },
+            onClickRow: function (row) {
+                window.location.href = "/qStock/qProInfo/" + row.ProductId;
+            }
+        });
+
+
+    }
+    test();
+    $(function() {
+        $('#mytab').bootstrapTable({
+//				url: "data/table.json",//数据源
+            search: true,//是否搜索
+            pagination: true,//是否分页
+            pageSize: 5,//单页记录数
+            showColumns: true,//列选择按钮
+            dataField: "rows",//服务端返回数据键值 就是说记录放的键值是rows，分页时使用总记录数的键值为total
+            pageList: [5, 10, 20, 50],//分页步进值
+            'data-locale':"zh-US",
+            dataType: "json",//期待返回数据类型
+            method: "post",//请求方式
+            columns: [{
+                field: 'column1',
+                title: '列名1',
+                sortable: true
+            }, {
+                field: 'column2',
+                title: '列名2',
+                sortable: true
+            }, {
+                field: 'column3',
+                title: '列名3',
+                sortable: true
+            }],
+            data:[]
+        });
+
+    });
+
+
+
+</script>
+
+
 </body>
 
 </html>

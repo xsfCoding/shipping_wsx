@@ -29,7 +29,7 @@ function getCommonData() {
         }
     });
 }
-function initCharts() {
+function initChartsC() {
     var shipid = $("#ship").val();
     if (shipid != "0") {
         LoadingMask.showloaddiv();
