@@ -560,6 +560,7 @@ function initUpCompany() {
 	myChartUpPrice.setOption(option);
 }
 
+
 /*
  * 标注每个港口的一个价格增幅情况
  */
@@ -567,8 +568,8 @@ function initLeftMap() {
 	var myChartMap = echarts.init(document.getElementById('selaMap'));
 	var portMap = ProcessData.processLeftMap(boardData);
 	var option = {
-
-		tooltip : {
+        backgroundColor: '#F0F0F0',
+        tooltip : {
 			formatter : function(e) {
 				// console.log(e);
 				for (var i = 0; i < portMap.tooltip.length; i++) {
@@ -589,15 +590,30 @@ function initLeftMap() {
 			}
 		},
 		toolbox : {
-			show : true,
-			orient : 'vertical',
+			show : false,
+			orient :'vertical',
 			left : 'right',
 			feature : {
 				saveAsImage : {}
 			}
 		},
+        // bmap: {
+        //     center: [116.307698, 40.056975], // 中心位置坐标
+        //     zoom: 5, // 地图缩放比例
+        //     roam: true // 开启用户缩放
+        // },
+
 		geo : {
 			map : 'world',
+            itemStyle: {					// 定义样式
+                normal: {					// 普通状态下的样式
+                    areaColor: '#909090',
+                    borderColor: '#111'
+                },
+                emphasis: {					// 高亮状态下的样式
+                    areaColor: '#2a333d'
+                }
+            },
 			label : {
 				emphasis : {
 					show : false
@@ -611,9 +627,28 @@ function initLeftMap() {
 			data : [],
 			left : 'left'
 		},
-		series : [
+        series: [
+            {
 
-		]
+                type: 'scatter', // series图表类型
+                coordinateSystem: 'geo', // series坐标系类型
+            }
+        ],
+
+        visualMap: {
+            type: 'continuous', // 连续型
+            min: 0,       		// 值域最小值，必须参数
+            max: 200,			// 值域最大值，必须参数
+            calculable: true,	// 是否启用值域漫游
+            inRange: {
+                color:['#6633CC', '#CC0000', '#000033']
+                // 指定数值从低到高时的颜色变化
+            },
+            textStyle: {
+                color: '#fff'	// 值域控件的文本颜色
+            }
+        }
+
 	};
 	var legend = [];
 	for (var j = 0; j < boardData.portSummary.length; j++) {
