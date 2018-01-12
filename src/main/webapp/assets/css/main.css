@@ -607,7 +607,7 @@ li.dropdown ul.dropdown-menu.alert > li h1 {
 
 .dashboard-tile.header .content {
     padding: 10px 20px;
-    background: 0 0;
+    background: #7c7c7c;
     padding-right: 10px;
     display: inline-block;
     position: relative;
@@ -639,11 +639,16 @@ li.dropdown ul.dropdown-menu.alert > li h1 {
 }
 
 .dashboard-tile.detail .content {
-    background: 0 0;
+    background: #3498db6b;
     padding: 10px 10px 13px;
     display: inline-block;
     position: relative;
-    z-index: 5
+    margin-top: -10px;
+    margin-left: -10px;
+    z-index: 5;
+    width: 200px;
+    height: 120px
+
 }
 
 .dashboard-tile.detail .icon {

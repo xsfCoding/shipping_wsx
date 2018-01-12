@@ -95,6 +95,10 @@ a:hover {
 html,
 body {
   height: 100%;
+  background: #f1f1f1 ;
+}
+.panel{
+    background: #fff;
 }
 
 .loader {
@@ -129,3 +133,9 @@ body {
 .hvr-grow:active {
     transform: scale(1.1);
 }
+.main-content-wrapper {
+
+    background:#f1f1f1 ;
+}
+
+
