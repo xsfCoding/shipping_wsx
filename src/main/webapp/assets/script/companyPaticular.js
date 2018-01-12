@@ -2,6 +2,7 @@
  * Created by qtt on 16/8/31.
  */
 var companyData = null;
+
 function getCommonData() {
     LoadingMask.showloaddiv();
     $.ajax({
@@ -11,7 +12,7 @@ function getCommonData() {
         success: function (data) {
             LoadingMask.hideloaddiv();
             commont = data;
-            $('#ship').append("<option value=" + 0 + ">" + "-选择船公司-</option>");
+            $('#ship').append("<option value=" + 0 + ">" + "AAL||澳亚航运    [-选择船公司-]</option>");
             var shipComp = [];
             for (var i in data.company) {
                 var cpmm = {
@@ -33,8 +34,11 @@ function getCommonData() {
         }
     });
 }
+
 function initChartsC() {
     var shipid = $("#ship").val();
+    // if(shipid == 0) shipid=1;
+
     if (shipid != "0") {
         LoadingMask.showloaddiv();
         require.config({
@@ -58,9 +62,9 @@ function initChartsC() {
                         alert('未查到相关记录，请重新选择查询条件.');
                     } else {
                         initPieChart(ec, 'pieChart');
+                        initBarChart(ec, 'barChart');
                         // initBarChart(ec,'barChart');
                         changeData(ec);
-                        setTableData(shipid);
                     }
                 }
             });
@@ -82,9 +86,11 @@ function initPieChart(ec, id) {
 
     var option1 = {
         title: {
-            text: '十大热门港口',
-            x: 'center'
+            text: '热门港口',
+            x: 'center',
+            y: 'top'
         },
+        color: ['#85b6b2', '#6d4f8d', '#cd5e7e', '#e38980', '#f7db88','#33A6B8', '#D0104C','#DB4D6D','#69B0AC', "#E87A90"],
         tooltip: {
             trigger: 'item',
             /*formatter: "{a} <br/>{b} : {c} ({d}%)"*/
@@ -96,24 +102,33 @@ function initPieChart(ec, id) {
             }
         },
         legend: {
-            x: 'center',
-            y: 'bottom',
-            data: pieData.legend
+            data: pieData.legend,
+            orient : 'horizontal',
+            x : 'center',
+            y:'bottom',
+            width:'80%',
+            icon:'circle',
         },
         calculable: true,
-        series: [
-            {
-                name: '面积模式',
-                type: 'pie',
-                radius: [30, 110],
-                // center : ['75%', 200],
-                roseType: 'area',
-                x: '100%',               // for funnel
-                max: 40,                // for funnel
-                sort: 'ascending',     // for funnel
-                data: pieData.chartData
+        series: (function (){
+            var series = [];
+            for (var i = 0; i < 20; i++) {
+                series.push({
+                    name: '面积模式',
+                    type: 'pie',
+                    hoverAnimation:false,
+                    startAngle:90+i*2,
+                    itemStyle : {normal : {
+                        label : {show : i > 18,formatter:'{d}%',},
+                        labelLine : {show : i > 18, length:35}
+                    }},
+                    radius : [i * 6 + 60, i * 6 + 64],
+                    data:pieData.chartData,
+                })
             }
-        ]
+            return series;
+        })()
+
     };
     myChart1.setOption(option1);
 
@@ -129,7 +144,7 @@ function initBarChart(ec, id) {
 
     var option2 = {
         title: {
-            text: '十大热门航线',
+            text: '热门航线',
             x: 'center'
         },
         tooltip: {
@@ -171,9 +186,8 @@ function initBarChart(ec, id) {
                         color: function (params) {
                             // build a color map as your need.
                             var colorList = [
-                                '#26C0C0', '#F0805A', '#F4E001', '#C6E579', '#D7504B', '#60C0DD', '#F3A43B',
-                                '#FAD860', '#9BCA63', '#FE8463', '#C1232B', '#B5C334', '#FCCE10', '#E87C25', '#27727B',
-
+                                '#f15b6c','#b7ba6b','#33a3dc','#ffe600','#f58f98','#76becc',
+                                '#ffc20e','#deab8a','#6f599c','#11264f','#aa2116'
                             ];
                             return colorList[params.dataIndex]
                         },
@@ -220,6 +234,62 @@ function initMap(ec, url, title) {
     myChart.showLoading();
     var ecConfig = require('echarts/config');
     var mapData = ProcessCompanyData.processMap(companyData.dischargingports);
+
+
+    // $('.filter-option .pull-left').value(mapData.legend);
+
+    var obj= {
+        name: '世界地图',
+        type: "map3d",
+        mapType: 'world',
+        roam: {
+            autoRotate: true,
+            autoRotate: 2,
+        },
+        selectedMode: 'single',
+        itemStyle: {
+            normal: {label: {show: false}},
+            emphasis: {label: {show: true}}
+        },
+        data: [],
+        // 自定义名称
+        nameMap: countryName,
+        baseLayer: {
+
+            backgroundColor: '',
+            backgroundImage:'../../asset/earth.jpg',
+            quality: 'high',
+            heightImage: '../../asset/earth.jpg'
+        },
+        // light: {
+        //     show: true,
+        //     // Use the system time
+        //     // time: '2013-08-07 18:09:09',
+        //     sunIntensity: 1
+        // },
+        background: '../../asset/background.jpg',
+        surfaceLayers: [{
+            type: 'texture',
+            distance: 3,
+            image: '../../asset/clouds.png'
+        }],
+        itemStyle: {
+            normal: {
+                label: {
+                    show: true
+                },
+                borderWidth: 1,
+                borderColor: 'yellow',
+                areaStyle: {
+                    color: 'rgba(0, 0, 0, 0)'
+                }
+            }
+        },
+    };
+    var tmp = $.extend({}, mapData.series[0], obj);
+    var tmp2 = new Array();
+    tmp2.push(tmp);
+
     var opts = {
         "title": {
             "text": "",
@@ -231,13 +301,14 @@ function initMap(ec, url, title) {
                 "color": "black"
             }
         },
+
         dataRange: {
             min: 0,
             max: 200,
             text: ['High', 'Low'],
             realtime: false,
             calculable: true,
-            color: ['red', 'yellow', 'lightskyblue']
+            color: ['#750000', '#4B0091', '#000093']
         },
         "legend": {
             "data": mapData.legend,
@@ -256,36 +327,10 @@ function initMap(ec, url, title) {
                 return out;
             }
         },
-        "series": mapData.series
+
+        "series": tmp2,
     };
 
-    opts.series.push(
-        {
-            name: '世界地图',
-            type: "map3d",
-            mapType: 'world',
-            roam: true,
-            selectedMode: 'single',
-            itemStyle: {
-                normal: {label: {show: false}},
-                emphasis: {label: {show: true}}
-            },
-            data: [],
-            // 自定义名称
-            nameMap: countryName,
-            baseLayer: {
-                backgroundColor: '',
-                backgroundImage: '../../asset/earth.jpg',
-                quality: 'high',
-            },
-
-            surfaceLayers: [{
-                type: 'texture',
-                distance: 3,
-                image: '../../asset/clouds.png'
-            }],
-        }
-    );
 
     myChart.setOption(opts);
     myChart.hideLoading();
@@ -298,4 +343,37 @@ function changeData(ec) {
 
 }
 
-getCommonData()
+getCommonData();
+// initChartsC();
+$(function () {
+    LoadingMask.showloaddiv();
+    require.config({
+        paths: {
+            'echarts': 'js/echarts',
+            'echarts-x': 'js/echarts-x'
+
+        }
+    });
+    require(['echarts', 'echarts/chart/pie', 'echarts-x', 'echarts/chart/bar',
+        'echarts/chart/map', 'echarts-x/chart/map3d'], function (ec) {
+
+        $.ajax({
+            url: '/quatationController/getShippingcompany_information',
+            type: "GET",
+            data: {'id': 1},
+            success: function (data) {
+                LoadingMask.hideloaddiv();
+                companyData = data;
+                if (data.detail == null || data.dischargingports.length == 0) {
+                    alert('未查到相关记录，请重新选择查询条件.');
+                } else {
+                    initPieChart(ec, 'pieChart');
+                    initBarChart(ec, 'barChart');
+                    // initBarChart(ec,'barChart');
+                    changeData(ec);
+                }
+            }
+        });
+    });
+
+})
