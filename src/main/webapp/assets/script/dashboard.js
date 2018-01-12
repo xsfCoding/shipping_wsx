@@ -88,7 +88,7 @@ function initUpPrice() {
     var option = {
         // backgroundColor: '#394056',
         title: {
-            text: '相比去年新增报价频次',
+            text: '进年新增报价频次',
             textStyle: {
                 fontWeight: 'normal',
                 fontSize: 16,
@@ -251,7 +251,7 @@ function initUpPort() {
 
         // backgroundColor: '#23243a',
         title: {
-            text: '相比去年港口覆盖个数',
+            text: '港口覆盖个数',
             textStyle: {
                 fontWeight: 'normal',
                 fontSize: 16,
@@ -456,7 +456,7 @@ function initUpLine() {
         },
         series: [
             {
-                name: '访问来源',
+                // name: '访问来源',
                 type: 'pie',
                 hoverAnimation: false,
                 legendHoverLink: false,
@@ -491,7 +491,7 @@ function initUpLine() {
                 ]
             },
             {
-                name: '访问来源',
+                // name: '访问来源',
                 type: 'pie',
                 radius: ['42%', '55%'],
                 color: ['#d74e67', '#0092ff', '#eba954', '#21b6b9', '#60a900', '#01949b', ' #f17677'],
@@ -519,7 +519,7 @@ function initUpCompany() {
     option = {
         // backgroundColor:'#333366',
         title: {
-            text: '船公司数量',
+            text: '公司港口数',
             x: 'center',
             y: 'center',
             textStyle: {
@@ -567,26 +567,26 @@ function initLeftMap() {
     var option = {
         // backgroundColor: '#f1f1f1',
         // backgroundColor  : '#67a8ce',
-        tooltip: {
-            formatter: function (e) {
-                // console.log(e);
-                for (var i = 0; i < portMap.tooltip.length; i++) {
-                    if (e.name == portMap.tooltip[i].name) {
-                        var str = e.name + '港口<br/>';
-                        str = str + "20规格：均价" + portMap.tooltip[i].price20
-                            + " 与去年相比增长" + portMap.tooltip[i].price20Rate
-                            + "<br/>";
-                        str = str + "40规格：均价" + portMap.tooltip[i].price40
-                            + " 与去年相比增长" + portMap.tooltip[i].price40Rate
-                            + "<br/>";
-                        str = str + "40H规格：均价" + portMap.tooltip[i].price40h
-                            + " 与去年相比增长" + portMap.tooltip[i].price40hRate
-                            + "<br/>";
-                        return str;
-                    }
-                }
-            }
-        },
+        // tooltip: {
+        //     formatter: function (e) {
+        //         // console.log(e);
+        //         for (var i = 0; i < portMap.tooltip.length; i++) {
+        //             if (e.name == portMap.tooltip[i].name) {
+        //                 var str = e.name + '港口<br/>';
+        //                 str = str + "20规格：均价" + portMap.tooltip[i].price20
+        //                     + " 与去年相比增长" + portMap.tooltip[i].price20Rate
+        //                     + "<br/>";
+        //                 str = str + "40规格：均价" + portMap.tooltip[i].price40
+        //                     + " 与去年相比增长" + portMap.tooltip[i].price40Rate
+        //                     + "<br/>";
+        //                 str = str + "40H规格：均价" + portMap.tooltip[i].price40h
+        //                     + " 与去年相比增长" + portMap.tooltip[i].price40hRate
+        //                     + "<br/>";
+        //                 return str;
+        //             }
+        //         }
+        //     }
+        // },
         toolbox: {
             show: false,
             orient: 'vertical',

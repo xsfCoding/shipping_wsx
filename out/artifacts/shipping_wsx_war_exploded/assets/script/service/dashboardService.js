@@ -2,7 +2,6 @@ var ProcessData = {
     processUpPrice: function (data) {
         var data1 = [];
         var data2 = [];
-
         var thisYear = data.thisyear;
         var lastYear = data.lastyear;
         var m;

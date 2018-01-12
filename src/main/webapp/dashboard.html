@@ -5,15 +5,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="Shortcut Icon" href="asset/logo.png"/>
-    <title>海运报价可视化</title>
+    <link rel="Shortcut Icon" href="asset/backmap.png" />
+    <title>海运报价可视化小组</title>
     <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-
-
     <link rel="stylesheet" href="assets/plugins/bootstrap-select.min.css">
     <link rel="stylesheet" href="assets/plugins/table/bootstrap-table.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <!--<link rel="stylesheet" href="assets/css/main.css">-->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/analysis_port.css">
     <style>
@@ -24,8 +22,7 @@
 </head>
 
 <body>
-<div id="loadbg"></div>
-<div class="loader"></div>
+
 <section id="container">
     <!--<header id="header">-->
     <!--&lt;!&ndash;logo start&ndash;&gt;-->
@@ -125,10 +122,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        <script type="application/javascript">
-                                            document.write(new Date().getFullYear() + "");
-                                        </script>
-                                        年各港口价格增幅
+                                        全球港口分布图
                                     </h3>
                                     <div class="actions pull-right">
                                         <i class="fa fa-chevron-down"></i>
@@ -144,47 +138,24 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        相比去年
+                                        船运信息
                                     </h3>
                                     <div class="actions pull-right">
                                         <i class="fa fa-chevron-down"></i>
                                         <i class="fa fa-times"></i>
                                     </div>
                                 </div>
-
                                 <div class="panel-body">
                                     <div id="upChart" style="height: 520px;width: 100%"></div>
                                 </div>
-
                             </div>
-
-
                         </div>
 
                     </div>
 
                 </div>
             </div>
-            <!--tiles end-->
-            <!--dashboard charts and map start-->
-            <!--<div class="row">-->
-            <!--<div class="col-md-12">-->
-            <!--<div class="panel panel-default">-->
-            <!--<div class="panel-heading">-->
-            <!--<h3 class="panel-title">统计报表</h3>-->
-            <!--<div class="actions pull-right">-->
-            <!--<i class="fa fa-chevron-down"></i>-->
-            <!--<i class="fa fa-times"></i>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="panel-body">-->
-            <!--<div id="sales-chart" style="height: 250px;"></div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
 
-            <!--</div>-->
-            <!--dashboard charts and map end-->
 
             <div class="row">
                 <div class="col-md-12">
@@ -194,7 +165,6 @@
                                 <h3 class="panel-title">港口航线分析</h3>
                                 <div class="actions pull-right">
                                     <i class="fa fa-chevron-down"></i>
-
                                 </div>
                             </div>
                             <div class="panel-body" style="height: 700px;">
