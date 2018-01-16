@@ -115,7 +115,7 @@ public class PortController {
 
         AnnuallyCount thisYearQuotationCount = routeDailyReportMapper.selectThisYearQuotationCount();
 
-        int thisYear = thisYearQuotationCount.getYear();
+        int thisYear = thisYearQuotationCount.getYear()-1;
         int lastYear = thisYear - 1;
 
         json.put("thisYear", String.format("%d年", thisYear));

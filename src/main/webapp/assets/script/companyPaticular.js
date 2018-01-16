@@ -234,8 +234,6 @@ function initMap(ec, url, title) {
     myChart.showLoading();
     var ecConfig = require('echarts/config');
     var mapData = ProcessCompanyData.processMap(companyData.dischargingports);
-
-
     // $('.filter-option .pull-left').value(mapData.legend);
 
     var obj= {
@@ -286,6 +284,7 @@ function initMap(ec, url, title) {
             }
         },
     };
+    console.log(companyData.dischargingports);
     var tmp = $.extend({}, mapData.series[0], obj);
     var tmp2 = new Array();
     tmp2.push(tmp);
