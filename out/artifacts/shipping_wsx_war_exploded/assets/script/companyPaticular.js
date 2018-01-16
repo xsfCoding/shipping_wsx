@@ -112,15 +112,15 @@ function initPieChart(ec, id) {
         calculable: true,
         series: (function (){
             var series = [];
-            for (var i = 0; i < 20; i++) {
+            for (var i = 0; i < 18; i++) {
                 series.push({
                     name: '面积模式',
                     type: 'pie',
                     hoverAnimation:false,
                     startAngle:90+i*2,
                     itemStyle : {normal : {
-                        label : {show : i > 18,formatter:'{d}%',},
-                        labelLine : {show : i > 18, length:35}
+                        label : {show : i > 16,formatter:'{d}%',},
+                        labelLine : {show : i > 16, length:20}
                     }},
                     radius : [i * 6 + 60, i * 6 + 64],
                     data:pieData.chartData,
@@ -308,7 +308,7 @@ function initMap(ec, url, title) {
             text: ['High', 'Low'],
             realtime: false,
             calculable: true,
-            color: ['#750000', '#4B0091', '#000093']
+            color: ['#fff731', '#d6a33c', '#d63b14']
         },
         "legend": {
             "data": mapData.legend,
